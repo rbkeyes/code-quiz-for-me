@@ -1,38 +1,37 @@
 // select timer
-var countdown = document.querySelector(".countdown-timer");
-var start = document.getElementById("start");
+var timerEl = document.getElementById('countdown');
 
-// starting point of timer
-var secondsRemaining = 60;
-countdown.textContent = 60;
-
-// set timer
-function startTimer() {
-    // set time interval for coundown
-    countdown = setInterval(function()
-    {
-        // subtract 1 every second
-        secondsRemaining--;
-
-        // display countdown
-        countdown.textContent = secondsRemaining;
-
-        // // clear interval when timer is done
-        if(secondsRemaining === 0) {
-            clearInterval(countdown);
-
-            quizComplete();
-        }
-        // function runs every 1000ms (once every second)
-        1000
-    });
+function countdown() {
+    var timeLeft = 60;
+    
+    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    var timeInterval = setInterval(function () {
+        // As long as the `timeLeft` is greater than 1
+        if (timeLeft > 1) {
+            // Set the `textContent` of `timerEl` to show the remaining seconds
+            timerEl.textContent = timeLeft + ' seconds remaining';
+            // Decrement `timeLeft` by 1
+            timeLeft--;
+        } else if (timeLeft === 1) {
+            // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+            timerEl.textContent = timeLeft + ' second remaining';
+            timeLeft--;
+        } else {
+            // Once `timeLeft` gets to 0, set `timerEl` to an empty string
+            timerEl.textContent = '';
+        // Use `clearInterval()` to stop the timer
+        clearInterval(timeInterval);
+        // Call the `displayMessage()` function
+        displayMessage();
+    }
+}, 1000);
 }
-
 
 // save your score
 function quizComplete() {
-
+    
 }
 
+var start = document.getElementById("start");
 
-start.addEventListener("click", startTimer)
+start.addEventListener("click", countdown)

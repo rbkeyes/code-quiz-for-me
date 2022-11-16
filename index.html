@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Quiz</title>
+    <link rel="stylesheet" href="./assets/style/style.cs">
 </head>
 
 <!-- body -->
@@ -13,9 +14,9 @@
 <body>
     <!-- header -->
     <header>
-            <h2>Check high scores</h2>
-            <h2>Time remaining: <h2>
-            <div class='countown-timer'></div>
+        <h4>Check high scores</h4>
+        <h4 id="countdown">
+            <h4>
     </header>
 
     <!-- main -->
@@ -29,21 +30,22 @@
         </section>
 
         <section id="quiz" style="display:none">
-            <div></div>
-            <h3 id="question"></h3>
-            <ol id="choices">
-                <!-- change list style to Letters instead of numbers -->
-                <li class="choice" id="A" onclick="checkAnswer('A')"></li>
-                <li class="choice" id="B" onclick="checkAnswer('B')"></li>
-                <li class="choice" id="C" onclick="checkAnswer('C')"></li>
-                <li class="choice" id="D" onclick="checkAnswer('D')"></li>
-                <button class="btn-next">Next</button>
-            </ol>
+            <div>
+                <h3 id="question"></h3>
+                <ol id="choices">
+                    <!-- change list style to Letters instead of numbers in CSS -->
+                    <li class="choice" id="A" onclick="checkAnswer('A')"></li>
+                    <li class="choice" id="B" onclick="checkAnswer('B')"></li>
+                    <li class="choice" id="C" onclick="checkAnswer('C')"></li>
+                    <li class="choice" id="D" onclick="checkAnswer('D')"></li>
+                    <button class="btn-next">Next</button>
+                </ol>
+            </div>
         </section>
     </main>
 
 
-    <script src="assets/js/script.js"></script>
+    <script src="./assets/js/script.js"></script>
 
 </body>
 
