@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,24 +9,45 @@
 </head>
 
 <!-- body -->
+
 <body>
     <!-- header -->
     <header>
         <nav>
             <p>Check high scores</p>
-            <p>Time remaining:<p> 
-                <div class='countown-timer'>60</div>
+            <p>Time remaining:
+            <p>
+            <div class='countown-timer'>60</div>
         </nav>
     </header>
-    
+
     <!-- main -->
-    <main>
-        <h2>Coding Quiz!</h2>
-        <p>Try to answer all of the multiple choice questions before time runs out! Any incorrect answer will deduct 10 seconds from your remaining time. Click "start" to begin.</p>
-        <button id="start">start</button>
+    <main id="container">
+
+        <section id="start-page">
+            <h2>Coding Quiz!</h2>
+            <p>Try to answer all of the multiple choice questions before time runs out! Any incorrect answer will deduct
+                10 seconds from your remaining time. Click "start" to begin.</p>
+            <button id="start">start</button>
+        </section>
+
+        <section id="quiz" style="display:none">
+            <div></div>
+            <h3 id="question"></h3>
+            <ol id="choices">
+                <!-- change list style to Letters instead of numbers -->
+                <li class="choice" id="A" onclick="checkAnswer('A')"></li>
+                <li class="choice" id="B" onclick="checkAnswer('B')"></li>
+                <li class="choice" id="C" onclick="checkAnswer('C')"></li>
+                <li class="choice" id="D" onclick="checkAnswer('D')"></li>
+                <button class="btn-next">Next</button>
+            </ol>
+        </section>
     </main>
-    
+
+
     <script src="assets/js/script.js"></script>
 
 </body>
+
 </html>
