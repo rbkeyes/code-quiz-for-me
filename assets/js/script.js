@@ -1,7 +1,10 @@
 // select timer
 var countdown = document.querySelector(".countdown-timer");
+var start = document.getElementById("start");
+
 // starting point of timer
-var secondsRemaining = 60
+var secondsRemaining = 60;
+countdown.textContent = 60;
 
 // set timer
 function startTimer() {
@@ -16,13 +19,13 @@ function startTimer() {
 
         // // clear interval when timer is done
         if(secondsRemaining === 0) {
-            clearInterval(timer);
+            clearInterval(countdown);
 
             quizComplete();
         }
-
-    // function runs every 1000ms (once every second)
-    }, 1000);
+        // function runs every 1000ms (once every second)
+        1000
+    });
 }
 
 
@@ -31,6 +34,5 @@ function quizComplete() {
 
 }
 
-var start = document.getElementById("start");
 
 start.addEventListener("click", startTimer)
