@@ -23,14 +23,14 @@
     <!-- main -->
     <main id="container">
 
-        <section id="start-page" style="display:block">
+        <section id="start-page">
             <h2>How to get started:</h2>
             <p>Try to answer all of the multiple choice questions before time runs out! Any incorrect answer will deduct
                 10 seconds from your remaining time. Click "Start Quiz" to begin.</p>
             <button id="start">Start Quiz</button>
         </section>
 
-        <section id="quiz" style="display:none">
+        <section id="quiz" hidden>
             <div>
                 <h3 id="question"></h3>
                 <ol id="choices">
@@ -39,6 +39,7 @@
                     <li class="choice" id="B" onclick="checkAnswer('B')"></li>
                     <li class="choice" id="C" onclick="checkAnswer('C')"></li>
                     <li class="choice" id="D" onclick="checkAnswer('D')"></li>
+                    <li id="correct" hidden></li>
                     <button class="btn-next" >Next</button>
                 </ol>
             </div>

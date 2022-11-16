@@ -4,23 +4,29 @@ function saveScore() {
 }
 
 function quizQuestions() {
-    // vars for questions + answer choices
+    // vars for start page & quiz section
+    var startPage = document.getElementById("start-page");
     var quiz = document.getElementById("quiz");
-    var display = quiz.getAttribute("display:none");
+
+    // vars for question, answer choices, correct answer
     var question = document.getElementById("question");
     var choices = document.getElementById("choices");
-    var choice = document.querySelectorAll(".choice");
-    var nextBtn = document.querySelector(".btn-next").disabled = true;
+    var choice = document.querySelectorAll("choice");
+    var choiceA = document.getElementById("A");
+    var choiceB = document.getElementById("B");
+    var choiceC = document.getElementById("C");
+    var choiceD = document.getElementById("D");
+    var answer = document.getElementById("correct");
 
-    if (display === "none") {
-        quiz.textContent = question + choices + nextBtn;
-        quiz.display.state = "block";
-
-        var startPage = getElementById("start-page");
-
+    if (startPage.hidden === false && quiz.hidden === true); {
+    startPage.hidden = true;
+    quiz.hidden = false ;
     }
+  
+    }
+    
 
-}
+
 
 function countdown() {
     // select timer
@@ -52,7 +58,6 @@ function countdown() {
 
 // save your score
 function quizComplete() {
-
 }
 
 var startBtn = document.getElementById("start");
