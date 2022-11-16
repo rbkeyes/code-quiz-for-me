@@ -1,37 +1,60 @@
-// select timer
-var timerEl = document.getElementById('countdown');
+
+
+function saveScore() {
+}
+
+function quizQuestions() {
+    // vars for questions + answer choices
+    var quiz = document.getElementById("quiz");
+    var display = quiz.getAttribute("display:none");
+    var question = document.getElementById("question");
+    var choices = document.getElementById("choices");
+    var choice = document.querySelectorAll(".choice");
+    var nextBtn = document.querySelector(".btn-next").disabled = true;
+
+    if (display === "none") {
+        quiz.textContent = question + choices + nextBtn;
+        quiz.display.state = "block";
+
+        var startPage = getElementById("start-page");
+
+    }
+
+}
 
 function countdown() {
-    var timeLeft = 60;
-    
+    // select timer
+    var countdownTimer = document.getElementById('countdown');
+    var timeLeft = 59;
+
+    // call function to display quiz questions
+    quizQuestions()
+
     // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     var timeInterval = setInterval(function () {
         // As long as the `timeLeft` is greater than 1
-        if (timeLeft > 1) {
-            // Set the `textContent` of `timerEl` to show the remaining seconds
-            timerEl.textContent = timeLeft + ' seconds remaining';
+        if (timeLeft >= 1) {
+            // Set the `textContent` of `countdownTimer` to show the remaining seconds
+            countdownTimer.textContent = timeLeft;
             // Decrement `timeLeft` by 1
             timeLeft--;
-        } else if (timeLeft === 1) {
-            // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
-            timerEl.textContent = timeLeft + ' second remaining';
-            timeLeft--;
         } else {
-            // Once `timeLeft` gets to 0, set `timerEl` to an empty string
-            timerEl.textContent = '';
-        // Use `clearInterval()` to stop the timer
-        clearInterval(timeInterval);
-        // Call the `displayMessage()` function
-        displayMessage();
-    }
-}, 1000);
+            // Once `timeLeft` gets to 0, display "time's up" message
+            countdownTimer.textContent = "time's up!";
+            // Use `clearInterval()` to stop the timer
+            clearInterval(timeInterval);
+
+            // Call the `saveScore()` function
+            saveScore();
+        }
+    }, 1000);
 }
 
 // save your score
 function quizComplete() {
-    
+
 }
 
-var start = document.getElementById("start");
+var startBtn = document.getElementById("start");
 
-start.addEventListener("click", countdown)
+startBtn.addEventListener("click", countdown)

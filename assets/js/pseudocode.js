@@ -4,7 +4,7 @@
 
 // heading "Coding Quiz" center of page
 // <p> text describing quiz below
-// start button
+// start button (event listener to start countdown, display first question)
 
 // when start button is clicked, timer begins counting down and <p> is replaced with first question
 // first question is <h2> + multiple choice buttons to select answer + "next" button (inactive until selection made)
@@ -25,7 +25,6 @@
 // "save my score" button and "cancel" button below
 
 
-// questions:
 // _______ is the process of finding errors and fixing them within a program.
 // A. Compiling
 // B. Executing

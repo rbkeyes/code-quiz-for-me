@@ -14,19 +14,20 @@
 <body>
     <!-- header -->
     <header>
+        <h1>Coding Quiz</h1>
         <h4>Check high scores</h4>
-        <h4 id="countdown">
+        <h4> Time remaining: <span id="countdown">60</span>
             <h4>
     </header>
 
     <!-- main -->
     <main id="container">
 
-        <section id="start-page">
-            <h2>Coding Quiz!</h2>
+        <section id="start-page" style="display:block">
+            <h2>How to get started:</h2>
             <p>Try to answer all of the multiple choice questions before time runs out! Any incorrect answer will deduct
-                10 seconds from your remaining time. Click "start" to begin.</p>
-            <button id="start">start</button>
+                10 seconds from your remaining time. Click "Start Quiz" to begin.</p>
+            <button id="start">Start Quiz</button>
         </section>
 
         <section id="quiz" style="display:none">
@@ -38,7 +39,7 @@
                     <li class="choice" id="B" onclick="checkAnswer('B')"></li>
                     <li class="choice" id="C" onclick="checkAnswer('C')"></li>
                     <li class="choice" id="D" onclick="checkAnswer('D')"></li>
-                    <button class="btn-next">Next</button>
+                    <button class="btn-next" >Next</button>
                 </ol>
             </div>
         </section>
