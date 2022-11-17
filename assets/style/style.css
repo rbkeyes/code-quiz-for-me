@@ -1,3 +1,32 @@
-body {
-
+:root {
+    
 }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.choice {
+    width: 10rem;
+    line-height: 2;
+    list-style-type: upper-alpha;
+    color: rgb(241, 227, 241);
+    background-color: rgb(73, 56, 90);
+    padding: 4px;
+    border-radius: 10px;
+    margin: 4px;
+}
+
+.choice:hover {
+    color: rgb(73, 56, 90);
+    background-color: rgb(241, 227, 241);
+}
+
+.choice::marker {
+    color: rgb(73, 56, 90);
+}
+
+.btn-next {
+    margin: 5px;
+}
+

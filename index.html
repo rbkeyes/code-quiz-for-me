@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Quiz</title>
-    <link rel="stylesheet" href="./assets/style/style.cs">
+    <link rel="stylesheet" href="./assets/style/style.css">
 </head>
 
 <!-- body -->
@@ -38,7 +38,6 @@
                     <li class="choice" id="B" onclick="checkAnswer('B')"></li>
                     <li class="choice" id="C" onclick="checkAnswer('C')"></li>
                     <li class="choice" id="D" onclick="checkAnswer('D')"></li>
-                    <li id="correct" hidden></li>
                     <!-- next button disabled until answer selected -->
                     <!-- click "next" to display next question -->
                     <button class="btn-next" disabled>Next</button>
@@ -46,10 +45,16 @@
         </section>
 
         <!-- save score to leaderboard -->
-        <section>
-            <h3>Quiz Complete!</h3>
+        <section id="quiz-complete" hidden>
+            <h3>Quiz complete</h3>
             <h4>Your score: <span id="my-score"></span></h4>
-            <form action="save-my-score">Save your score:</form>
+            <form action="save-my-score" method="save">
+                <label for="initials">
+                    Enter your initials:
+                </label>
+                <input type="text" id="initials" name="enter_initials" />
+            </form>
+            <button type = "submit">Save your score</button>
         </section>
     </main>
 
