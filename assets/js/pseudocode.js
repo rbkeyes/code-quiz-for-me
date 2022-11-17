@@ -25,26 +25,26 @@
 // "save my score" button and "cancel" button below
 
 
-// _______ is the process of finding errors and fixing them within a program.
-// A. Compiling
-// B. Executing
-// C. Debugging
-// D. Scanning
+// 
+// A. 
+// B. 
+// C. 
+// D. 
 
-// Which of the following variable types can hold a value of either true or false?
-// Boolean
-// string
-// number
-// array
+// 
+// 
+// 
+// 
+// 
 
-// A loop that never ends is referred to as a(n)_________.
-// While loop
-// Infinite loop
-// Recursive loop
-// for loop
+// 
+// 
+// 
+// 
+// 
 
-// What is the name of the operation that joins two strings together?
-// function
-// push
-// join
-// concatenation
+// 
+// 
+// 
+// 
+// 

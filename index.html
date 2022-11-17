@@ -31,7 +31,6 @@
         </section>
 
         <section id="quiz" hidden>
-            <div>
                 <h3 id="question"></h3>
                 <ol id="choices">
                     <!-- change list style to Letters instead of numbers in CSS -->
@@ -40,9 +39,17 @@
                     <li class="choice" id="C" onclick="checkAnswer('C')"></li>
                     <li class="choice" id="D" onclick="checkAnswer('D')"></li>
                     <li id="correct" hidden></li>
-                    <button class="btn-next" >Next</button>
+                    <!-- next button disabled until answer selected -->
+                    <!-- click "next" to display next question -->
+                    <button class="btn-next" disabled>Next</button>
                 </ol>
-            </div>
+        </section>
+
+        <!-- save score to leaderboard -->
+        <section>
+            <h3>Quiz Complete!</h3>
+            <h4>Your score: <span id="my-score"></span></h4>
+            <form action="save-my-score">Save your score:</form>
         </section>
     </main>
 
