@@ -8,7 +8,7 @@ var choiceA = document.getElementById("A");
 var choiceB = document.getElementById("B");
 var choiceC = document.getElementById("C");
 var choiceD = document.getElementById("D");
-// var answer = document.querySelector("answer");
+var answer = "";
 
 var quizQuestions = [
     {
@@ -17,6 +17,7 @@ var quizQuestions = [
         choiceB: "executing",
         choiceC: "debugging",
         choiceD: "scanning",
+        answer: choiceC,
     }, {
         question: "Which of the following variable types can hold a value of either true or false?",
         choiceA: "boolean",
@@ -38,8 +39,6 @@ var quizQuestions = [
     }
 ]
 
-var quizAnswers = [choiceC, choiceA, choiceB, choiceD]
-
 function displayNextQuestion() {
     // var lastQuestion = question.length - 1;
     let currentQuestion = 0;
@@ -54,11 +53,14 @@ function displayNextQuestion() {
     console.log(q.choiceC);
     choiceD.textContent = q.choiceD;
     console.log(q.choiceD);
+    answer = q.answer;
+    console.log(q.answer);
+
  
     if (currentQuestion < quiz.length) {
         currentQuestion++
         displayNextQuestion()
-    }
+    } 
 }
 
     // } else {
@@ -93,7 +95,8 @@ function countdown() {
             countdownTimer.textContent = "time's up!";
             // Use `clearInterval()` to stop the timer
             clearInterval(timeInterval);
-
+            quiz.hidden=true;
+            quizComplete.hidden=false;
             // Call the `saveScore()` function
             // saveScore();
         }
