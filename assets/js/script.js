@@ -1,14 +1,26 @@
+var timeLeft = 59;
+
 var startPage = document.getElementById("start-page");
 var quiz = document.getElementById("quiz");
 var quizComplete = document.getElementById("quiz-complete");
 
 var question = document.getElementById("question");
-var selection = document.querySelectorAll("choice");
+var choice = document.querySelectorAll(".choice");
 var choiceA = document.getElementById("A");
 var choiceB = document.getElementById("B");
 var choiceC = document.getElementById("C");
 var choiceD = document.getElementById("D");
-var answer = "";
+var correct;
+var finalScore = document.getElementById("my-score");
+
+function saveScore() { 
+    let totalPoints = 0;
+    totalPoints += (correct/quiz.length);
+    // save score, initials to local storage
+    // submit button to save
+}
+
+// retrieve scores when "view high scores" is clicked.
 
 var quizQuestions = [
     {
@@ -17,95 +29,110 @@ var quizQuestions = [
         choiceB: "executing",
         choiceC: "debugging",
         choiceD: "scanning",
-        answer: choiceC,
+        answer: "choiceC",
     }, {
         question: "Which of the following variable types can hold a value of either true or false?",
         choiceA: "boolean",
         choiceB: "string",
         choiceC: "number",
         choiceD: "array",
+        answer: "choiceA",
     }, {
         question: "A loop that never ends is referred to as a(n)_________.",
         choiceA: "while loop",
         choiceB: "infinite loop",
         choiceC: "recursive loop",
         choiceD: "for loop",
+        answer: "choiceB",
     }, {
         question: "What is the name of the operation that joins two strings together?",
         choiceA: "function",
         choiceB: "push",
         choiceC: "join",
         choiceD: "concatenation",
+        answer: "choiceD",
     }
 ]
 
-function displayNextQuestion() {
-    // var lastQuestion = question.length - 1;
-    let currentQuestion = 0;
-    let q = quizQuestions[currentQuestion];
-    question.textContent = q.question;
-    console.log(q.question);
-    choiceA.textContent = q.choiceA;
-    console.log(q.choiceA);
-    choiceB.textContent = q.choiceB;
-    console.log(q.choiceB);
-    choiceC.textContent = q.choiceC;
-    console.log(q.choiceC);
-    choiceD.textContent = q.choiceD;
-    console.log(q.choiceD);
-    answer = q.answer;
-    console.log(q.answer);
+let currentQuestion = 0;
+let q = quizQuestions[currentQuestion];
 
- 
+question.textContent = q.question;
+console.log(q.question);
+choiceA.textContent = q.choiceA;
+console.log(q.choiceA);
+choiceB.textContent = q.choiceB;
+console.log(q.choiceB);
+choiceC.textContent = q.choiceC;
+console.log(q.choiceC);
+choiceD.textContent = q.choiceD;
+console.log(q.choiceD);
+
+answer = q.answer;
+console.log(q.answer);
+
+function displayNextQuestion() {
     if (currentQuestion < quiz.length) {
         currentQuestion++
         displayNextQuestion()
-    } 
+    } else {
+        saveScore()
+    }
 }
 
-    // } else {
-    //     saveScore()
-    // }
+function correctAnswer() {
+        var result = document.createElement("h3");
+        result.textContent = "Correct!";
+        quiz.appendChild(result);
+        correct++;
 
-    // var checkAnswer = document.querySelector("checkAnswer('')");
-    // choice.addEventListener("click", checkAnswer() {
-    //     if (choice == q.answer)
-    // });
+        console.log(result);   
+    }
 
-    // var nextBtn = document.querySelector("btn-next");
 
-    // nextBtn.addEventListener("click", displayNextQuestion)
+function incorrectAnswer() {
+    timeLeft -+ 10;
+    
+}
+
+function checkAnswer(event) {
+    var selection = event.target;
+    console.log(selection);
+
+    if (selection === q.answer) {
+        correctAnswer()  
+        displayNextQuestion();
+      
+        console.log(result);
+    } else {
+        incorrectAnswer()        
+    }
+}
+
+quiz.addEventListener("click", checkAnswer)
 
 
 function countdown() {
     // select timer
     var countdownTimer = document.getElementById('countdown');
-    var timeLeft = 59;
 
-    // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    // set interval
     var timeInterval = setInterval(function () {
-        // As long as the `timeLeft` is greater than 1
+        // decrement timer
         if (timeLeft >= 1) {
-            // Set the `textContent` of `countdownTimer` to show the remaining seconds
             countdownTimer.textContent = timeLeft;
-            // Decrement `timeLeft` by 1
             timeLeft--;
+            // set time's up message and clear timer when timeLeft = 0
         } else {
-            // Once `timeLeft` gets to 0, display "time's up" message
             countdownTimer.textContent = "time's up!";
-            // Use `clearInterval()` to stop the timer
             clearInterval(timeInterval);
-            quiz.hidden=true;
-            quizComplete.hidden=false;
+            quiz.hidden = true;
+            quizComplete.hidden = false;
             // Call the `saveScore()` function
             // saveScore();
         }
     }, 1000);
 }
-
-// save your score
-// function quizComplete() {
-// }
 
 function startQuiz() {
     if (startPage.hidden === false && quiz.hidden === true) {
@@ -115,7 +142,6 @@ function startQuiz() {
 
     countdown();
     displayNextQuestion();
-
 }
 
 var startBtn = document.getElementById("start");

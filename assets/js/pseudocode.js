@@ -222,3 +222,31 @@ function scoreRender(){
 
 
 
+
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+//Check if selected answer is correct or wrong
+function check(element){
+   if(element.id == questions[currentIndex].answer){
+       element.className="correct"
+       updateAnswersTracker("correct")
+       score++
+   }
+   else {
+       element.className="wrong"
+       updateAnswersTracker("wrong")
+   }
+   disableClick();
+}

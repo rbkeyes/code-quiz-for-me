@@ -15,7 +15,7 @@
     <!-- header -->
     <header>
         <h1>Coding Quiz</h1>
-        <h4>Check high scores</h4>
+        <h4>View high scores</h4>
         <h4> Time remaining: <span id="countdown">60</span>
             <h4>
     </header>
@@ -40,15 +40,15 @@
                     <li class="choice" id="D"></li>
                     <!-- next button disabled until answer selected -->
                     <!-- click "next" to display next question -->
-                    <button class="btn-next" disabled>Next</button>
+                    <!-- <button id="btn-next" disabled>Next</button> -->
                 </ol>
-                <h3 class="result"></h3>
+                <!-- <h3 id="result"></h3> -->
         </section>
 
         <!-- save score to leaderboard -->
         <section id="quiz-complete" hidden>
             <h3>Quiz complete</h3>
-            <h4>Your score: <span id="my-score"></span></h4>
+            <h4>Your score: <span id="my-score"></span>%</h4>
             <form action="save-my-score" method="save">
                 <label for="initials">
                     Enter your initials:
