@@ -1,26 +1,19 @@
-var timeLeft = 59;
-
 var startPage = document.getElementById("start-page");
-var quiz = document.getElementById("quiz");
-var quizComplete = document.getElementById("quiz-complete");
+var startBtn = document.getElementById("start");
 
+var quiz = document.getElementById("quiz");
+var timeLeft = 59;
 var question = document.getElementById("question");
 var choice = document.querySelectorAll(".choice");
 var choiceA = document.getElementById("A");
 var choiceB = document.getElementById("B");
 var choiceC = document.getElementById("C");
 var choiceD = document.getElementById("D");
-var correct;
+var choicesCorrect = 0;
+
+var quizComplete = document.getElementById("quiz-complete");
 var finalScore = document.getElementById("my-score");
-
-function saveScore() { 
-    let totalPoints = 0;
-    totalPoints += (correct/quiz.length);
-    // save score, initials to local storage
-    // submit button to save
-}
-
-// retrieve scores when "view high scores" is clicked.
+var saveBtn = document.querySelector('.save-button');
 
 var quizQuestions = [
     {
@@ -29,35 +22,36 @@ var quizQuestions = [
         choiceB: "executing",
         choiceC: "debugging",
         choiceD: "scanning",
-        answer: "choiceC",
+        answer: "C",
     }, {
         question: "Which of the following variable types can hold a value of either true or false?",
         choiceA: "boolean",
         choiceB: "string",
         choiceC: "number",
         choiceD: "array",
-        answer: "choiceA",
+        answer: "A",
     }, {
         question: "A loop that never ends is referred to as a(n)_________.",
         choiceA: "while loop",
         choiceB: "infinite loop",
         choiceC: "recursive loop",
         choiceD: "for loop",
-        answer: "choiceB",
+        answer: "B",
     }, {
         question: "What is the name of the operation that joins two strings together?",
         choiceA: "function",
         choiceB: "push",
         choiceC: "join",
         choiceD: "concatenation",
-        answer: "choiceD",
+        answer: "D",
     }
 ]
 
+function displayNextQuestion() {
 let currentQuestion = 0;
 let q = quizQuestions[currentQuestion];
 
-question.textContent = q.question;
+question.textContent = question;
 console.log(q.question);
 choiceA.textContent = q.choiceA;
 console.log(q.choiceA);
@@ -71,46 +65,34 @@ console.log(q.choiceD);
 answer = q.answer;
 console.log(q.answer);
 
-function displayNextQuestion() {
     if (currentQuestion < quiz.length) {
         currentQuestion++
-        displayNextQuestion()
     } else {
-        saveScore()
+        // saveScore()
     }
 }
 
-function correctAnswer() {
-        var result = document.createElement("h3");
-        result.textContent = "Correct!";
-        quiz.appendChild(result);
-        correct++;
-
-        console.log(result);   
-    }
-
-
-function incorrectAnswer() {
-    timeLeft -+ 10;
-    
-}
-
-function checkAnswer(event) {
-    var selection = event.target;
+var checkAnswer = function(click) {
+    if (choice = click.target) {
+    var selection = choice.id;
     console.log(selection);
-
-    if (selection === q.answer) {
-        correctAnswer()  
-        displayNextQuestion();
-      
-        console.log(result);
+    if (selection === answer) {
+        correctAnswer(); 
     } else {
-        incorrectAnswer()        
+        // incorrectAnswer()        
     }
 }
-
+}
 quiz.addEventListener("click", checkAnswer)
 
+function correctAnswer() {
+    var result = document.createElement("h3");
+    result.textContent = "Correct!";
+    quiz.appendChild(result);
+    choicesCorrect++;
+    displayNextQuestion();
+
+}
 
 function countdown() {
     // select timer
@@ -124,7 +106,7 @@ function countdown() {
             timeLeft--;
             // set time's up message and clear timer when timeLeft = 0
         } else {
-            countdownTimer.textContent = "time's up!";
+            countdownTimer.textContent = "Time's up!";
             clearInterval(timeInterval);
             quiz.hidden = true;
             quizComplete.hidden = false;
@@ -144,5 +126,4 @@ function startQuiz() {
     displayNextQuestion();
 }
 
-var startBtn = document.getElementById("start");
 startBtn.addEventListener("click", startQuiz);
