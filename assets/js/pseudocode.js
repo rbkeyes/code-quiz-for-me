@@ -10,10 +10,7 @@
 
 
 
-// function incorrectAnswer() {
-// timeLeft -+ 10;
 
-// }
 
 var quizQuestions = [
     {
