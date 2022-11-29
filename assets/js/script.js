@@ -47,32 +47,26 @@ var quizQuestions = [
     }
 ]
 
-let currentQuestion = 0;
-function displayNextQuestion() {
-    let q = quizQuestions[currentQuestion];
 
-question.textContent = q.question;
-console.log(q.question);
-choiceA.textContent = q.choiceA;
-console.log(q.choiceA);
-choiceB.textContent = q.choiceB;
-console.log(q.choiceB);
-choiceC.textContent = q.choiceC;
-console.log(q.choiceC);
-choiceD.textContent = q.choiceD;
-console.log(q.choiceD);
-answer = q.answer;
-console.log(q.answer);
+function displayNextQuestion(q) {
+    let current = quizQuestions[q];
 
-    if (currentQuestion < quiz.length) {
-        currentQuestion++
-    } else {
-        // saveScore()
-    }
+question.textContent = current.question;
+    console.log(current.question);
+choiceA.textContent = current.choiceA;
+    console.log(current.choiceA);
+choiceB.textContent = current.choiceB;
+    console.log(current.choiceB);
+choiceC.textContent = current.choiceC;
+    console.log(current.choiceC);
+choiceD.textContent = current.choiceD;
+    console.log(current.choiceD);
+answer = current.answer;
+    console.log(current.answer);
 }
 
 var checkAnswer = function(click) {
-    if (choice = click.target) {
+    if (choice == click.target) {
     var selection = choice.id;
     console.log(selection);
     if (selection === answer) {
@@ -85,10 +79,10 @@ var checkAnswer = function(click) {
 quiz.addEventListener("click", checkAnswer)
 
 function correctAnswer() {
-    if (currentQuestion < quiz.length) {
-        currentQuestion++
-        console.log(currentQuestion)
-        displayNextQuestion();
+    if (q < quiz.length) {
+        q = q++
+        displayNextQuestion(+1);
+        console.log(displ)
     }
         choicesCorrect++;
         var result = document.createElement("h3");
@@ -126,7 +120,7 @@ function startQuiz() {
     }
 
     countdown();
-    displayNextQuestion();
+    displayNextQuestion(q=0);
 }
 
 startBtn.addEventListener("click", startQuiz);
