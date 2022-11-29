@@ -47,11 +47,11 @@ var quizQuestions = [
     }
 ]
 
-function displayNextQuestion() {
 let currentQuestion = 0;
-let q = quizQuestions[currentQuestion];
+function displayNextQuestion() {
+    let q = quizQuestions[currentQuestion];
 
-question.textContent = question;
+question.textContent = q.question;
 console.log(q.question);
 choiceA.textContent = q.choiceA;
 console.log(q.choiceA);
@@ -61,7 +61,6 @@ choiceC.textContent = q.choiceC;
 console.log(q.choiceC);
 choiceD.textContent = q.choiceD;
 console.log(q.choiceD);
-
 answer = q.answer;
 console.log(q.answer);
 
@@ -86,13 +85,17 @@ var checkAnswer = function(click) {
 quiz.addEventListener("click", checkAnswer)
 
 function correctAnswer() {
-    var result = document.createElement("h3");
-    result.textContent = "Correct!";
-    quiz.appendChild(result);
-    choicesCorrect++;
-    displayNextQuestion();
+    if (currentQuestion < quiz.length) {
+        currentQuestion++
+        console.log(currentQuestion)
+        displayNextQuestion();
+    }
+        choicesCorrect++;
+        var result = document.createElement("h3");
+        result.textContent = "Correct!";
+        quiz.appendChild(result);
+    };
 
-}
 
 function countdown() {
     // select timer
