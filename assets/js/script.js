@@ -66,16 +66,16 @@ answer = current.answer;
 }
 
 var checkAnswer = function(click) {
-    if (choice == click.target) {
-    var selection = choice.id;
+    var selection = (choice = click.target).id
     console.log(selection);
     if (selection === answer) {
         correctAnswer(); 
+        console.log("correct!");
     } else {
         // incorrectAnswer()        
     }
 }
-}
+
 quiz.addEventListener("click", checkAnswer)
 
 function correctAnswer() {
