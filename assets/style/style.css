@@ -1,5 +1,6 @@
 :root {
-    
+    --dark: rgb(73, 56, 90);
+    --light: rgb(241, 227, 241);
 }
 
 body {
@@ -9,7 +10,7 @@ body {
 .choice {
     width: 10rem;
     line-height: 2;
-    list-style-type: upper-alpha;
+    list-style-type: none;
     color: rgb(241, 227, 241);
     background-color: rgb(73, 56, 90);
     padding: 4px;
@@ -18,8 +19,19 @@ body {
 }
 
 .choice:hover {
-    color: rgb(73, 56, 90);
-    background-color: rgb(241, 227, 241);
+    color: var(--dark);
+    background-color: var(--light);
+}
+
+.final-choice {
+    width: 10rem;
+    line-height: 2;
+    list-style-type: upper-alpha;
+    color: rgb(241, 227, 241);
+    background-color: rgb(73, 56, 90);
+    padding: 4px;
+    border-radius: 10px;
+    margin: 4px;
 }
 
 .choice::marker {
@@ -31,14 +43,14 @@ body {
 }
 
 .select-correct {
-    display: inline-block;
+    /* display: inline-block; */
     width: 25rem;
     background-color:#B9E5E6;
     padding:5px; border-radius:10px;
 }
 
 .select-incorrect {
-    display: inline-block;
+    /* display: inline-block; */
     width: 25rem;
     background-color:#F5D0C8;
     padding:5px; border-radius:10px;

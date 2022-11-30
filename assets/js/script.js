@@ -2,32 +2,39 @@
 const quizQuestions = [
     {
         question: "_______ is the process of finding errors and fixing them within a program.",
-        choiceA: "compiling",
-        choiceB: "executing",
-        choiceC: "debugging",
-        choiceD: "scanning",
+        choiceA: "A:  compiling",
+        choiceB: "B:  executing",
+        choiceC: "C:  debugging",
+        choiceD: "D:  scanning",
         answer: "C",
     }, {
         question: "Which of the following variable types can hold a value of either true or false?",
-        choiceA: "boolean",
-        choiceB: "string",
-        choiceC: "number",
-        choiceD: "array",
+        choiceA: "A:  boolean",
+        choiceB: "B:  string",
+        choiceC: "C:  number",
+        choiceD: "D:  array",
         answer: "A",
     }, {
         question: "A loop that never ends is referred to as a(n)_________.",
-        choiceA: "while loop",
-        choiceB: "infinite loop",
-        choiceC: "recursive loop",
-        choiceD: "for loop",
+        choiceA: "A:  while loop",
+        choiceB: "B:  infinite loop",
+        choiceC: "C:  recursive loop",
+        choiceD: "D:  for loop",
         answer: "B",
     }, {
         question: "What is the name of the operation that joins two strings together?",
-        choiceA: "function",
-        choiceB: "push",
-        choiceC: "join",
-        choiceD: "concatenation",
+        choiceA: "A:  function",
+        choiceB: "B:  push",
+        choiceC: "C:  join",
+        choiceD: "D:  concatenation",
         answer: "D",
+    }, {
+        question: "",
+        choiceA: "A: ",
+        choiceB: "B: ",
+        choiceC: "C: ",
+        choiceD: "D: ",
+        answer: "",
     }
 ]
 // start page variables
@@ -64,6 +71,7 @@ function startQuiz() {
     if (startPage.hidden === false && quiz.hidden === true) {
         startPage.hidden = true;
         quiz.hidden = false;
+        choices.hidden = false;
     }
     // start countdown
     timeInterval = setInterval(countdown, 1000);
@@ -99,10 +107,16 @@ function displayNextQuestion() {
     if (q < quizQuestions.length) {
         q++
         console.log('q = ' + q)
-        // } else {
-        //     finalQuestion();
     }
 };
+
+// add event listener to each choice
+function addChoiceEventListener() {
+    for (var i = 0; i<choice.length; i++)
+    choice[i].addEventListener("click", checkAnswer, true);
+    return;
+    }
+    addChoiceEventListener()
 
 // check if selected answer is correct
 function checkAnswer(click) {
@@ -112,7 +126,7 @@ function checkAnswer(click) {
             correctAnswer();
          } else {
             incorrectAnswer();
-    } 
+    }     
 };
 
 // run if selected answer is correct
@@ -121,7 +135,7 @@ function correctAnswer() {
     console.log('score: ' + score)
     result.textContent = "That is correct!";
     result.className = 'select-correct';
-    if (q < quizQuestions.length) {
+    if (q < (quizQuestions.length-1)) {
         displayNextQuestion();
     } else {
         finalQuestion();
@@ -134,7 +148,7 @@ function incorrectAnswer() {
     console.log('score: ' + score);
     result.textContent = "Sorry, that is incorrect.";
     result.className = 'select-incorrect';
-    if (q < quizQuestions.length) {
+    if (q < (quizQuestions.length-1)) {
         displayNextQuestion();
     } else {
         finalQuestion();
@@ -142,13 +156,20 @@ function incorrectAnswer() {
 };
 
 function finalQuestion() {
+    choices.hidden=true;
     clearInterval(timeInterval);
-    countdownTimer.textContent = "Congratulations, you have completed the quiz!";
-    choices.removeEventListener('click', checkAnswer);
+    timeInterval.textContent = "0";
+    question.textContent = "Congratulations! You have completed the quiz. Click the button below to view your score."
     viewScoreBtn.hidden = false;
     viewScoreBtn.addEventListener('click', endOfQuiz);
 };
 
+// end of quiz (out of time or answered final question)
+function endOfQuiz() {
+    quiz.hidden = true;
+    quizComplete.hidden = false;
+    finalScore.textContent = score / choice.length
+}
+
 // event listeners
 startBtn.addEventListener("click", startQuiz);
-choices.addEventListener("click", checkAnswer);
