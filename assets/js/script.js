@@ -30,92 +30,45 @@ const quizQuestions = [
         answer: "D",
     }
 ]
-
-// get main section elements from HTML
+// start page variables
 const startPage = document.getElementById("start-page");
 const startBtn = document.getElementById("start");
-const viewScoreBtn = document.getElementById('btn-save-score');
+
 const quizComplete = document.getElementById("quiz-complete");
 
-// get variables
+// timer variables
 var countdownTimer = document.getElementById('countdown');
+var timeInterval;
+var timeLeft = 59;
+
+// quiz variables
 var quiz = document.getElementById("quiz");
+var q = 0
 var question = document.getElementById("question");
 var choice = document.querySelectorAll(".choice");
 var choiceA = document.getElementById("A");
 var choiceB = document.getElementById("B");
 var choiceC = document.getElementById("C");
 var choiceD = document.getElementById("D");
+var result = document.getElementById('result');
+const viewScoreBtn = document.getElementById('btn-save-score');
+
+// quiz complete variables
+var score = 0;
 var finalScore = document.getElementById("my-score");
 var saveBtn = document.querySelector('.save-button');
-var result = document.getElementById('result');
 
-var q = 0
-var timeLeft = 59;
-var score = 0;
-
-// display questions by index
-function displayNextQuestion() {
-    var current = quizQuestions[q];
-    question.textContent = current.question;
-    choiceA.textContent = current.choiceA;
-    choiceB.textContent = current.choiceB;
-    choiceC.textContent = current.choiceC;
-    choiceD.textContent = current.choiceD;
-    answer = current.answer;
-
-    if (q < quizQuestions.length) {
-
-    } else {
-        finalQuestion();
+// start quiz
+function startQuiz() {
+    if (startPage.hidden === false && quiz.hidden === true) {
+        startPage.hidden = true;
+        quiz.hidden = false;
     }
+    // start countdown
+    timeInterval = setInterval(countdown, 1000);
+    // display first question
+    displayNextQuestion();
 }
-
-// check if selected answer is correct
-var checkAnswer = function (click) {
-    var selection = (choice = click.target).id
-    console.log('you selected ' + selection);
-    if (selection === answer) {
-        correctAnswer()
-    } else if (selection !== answer) {
-        incorrectAnswer()
-    }
-};
-quiz.addEventListener("click", checkAnswer)
-
-// run if selected answer is correct
-function correctAnswer() {
-    score++;
-    console.log('score: ' + score)
-    result.textContent = "That is correct!";
-    result.className = 'select-correct';
-    if (q < quizQuestions.length) {
-        displayNextQuestion();
-    } else {
-        finalQuestion();
-    }
-};
-
-// run if selected answer is incorrect
-function incorrectAnswer() {
-// decrement 10 s for incorrect answer
-    result.textContent = "Sorry, that is incorrect.";
-    result.className = 'select-incorrect';
-    if (q < quizQuestions.length) {
-        displayNextQuestion();
-    } else {
-        finalQuestion();
-    }
-};
-
-function finalQuestion() {
-    // clearInterval(timeInterval);
-    countdownTimer.textContent = "Congratulations, you have completed the quiz!";
-    quiz.removeEventListener('click', displayNextQuestion);
-    viewScoreBtn.textContent = "View Final Score";
-    quiz.appendChild(viewScoreBtn);
-    viewScoreBtn.addEventListener('click', endOfQuiz);
-};
 
 // set countdown timer
 function countdown() {
@@ -132,32 +85,36 @@ function countdown() {
         }
     };
 
+// display questions by index
+function displayNextQuestion() {
+    var current = quizQuestions[q];
+    question.textContent = current.question;
+    choiceA.textContent = current.choiceA;
+    choiceB.textContent = current.choiceB;
+    choiceC.textContent = current.choiceC;
+    choiceD.textContent = current.choiceD;
+    answer = current.answer;
 
-// end of quiz (out of time or answered final question)
-function endOfQuiz() {
-    quiz.hidden = true;
-    quizComplete.hidden = false;
-    finalScore.textContent = score / choice.length
-}
-
-function saveScore() { 
-    let totalPoints = 0;
-    totalPoints += (correct/quiz.length);
-    // save score, initials to local storage
-    // submit button to save
-}
-
-// start quiz
-function startQuiz() {
-    if (startPage.hidden === false && quiz.hidden === true) {
-        startPage.hidden = true;
-        quiz.hidden = false;
+    if (q < quizQuestions.length) {
+        q++
+        console.log ('q = ' + q)
+    // } else {
+    //     finalQuestion();
     }
-    // start countdown
-    var countdownTimer = setInterval(countdown, 1000);
-    // display first question
-    displayNextQuestion();
 }
 
-// event listener for start button, call startQuiz()
+// check if selected answer is correct
+var checkAnswer = function (click) {
+    click.preventDefault;
+    var selection = (choice = click.target).id
+    console.log('you selected ' + selection);
+    if (selection === answer) {
+        correctAnswer()
+    } else if (selection !== answer) {
+        incorrectAnswer()
+    }
+};
+
+// event listeners
 startBtn.addEventListener("click", startQuiz);
+quiz.addEventListener("click", checkAnswer);
