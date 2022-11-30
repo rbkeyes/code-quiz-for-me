@@ -45,6 +45,7 @@ var timeLeft = 59;
 var quiz = document.getElementById("quiz");
 var q = 0
 var question = document.getElementById("question");
+var choices = document.getElementById('choices');
 var choice = document.querySelectorAll(".choice");
 var choiceA = document.getElementById("A");
 var choiceB = document.getElementById("B");
@@ -72,18 +73,18 @@ function startQuiz() {
 
 // set countdown timer
 function countdown() {
-        // decrement timer
-        if (timeLeft >= 1) {
-            countdownTimer.textContent = timeLeft;
-            timeLeft--;
-            // set time's up message and clear timer when timeLeft = 0
-        } else {
-            countdownTimer.textContent = "Time's up!";
-            clearInterval(timeInterval);
-            quiz.hidden = true;
-            quizComplete.hidden = false;
-        }
-    };
+    // decrement timer
+    if (timeLeft >= 1) {
+        countdownTimer.textContent = timeLeft;
+        timeLeft--;
+        // set time's up message and clear timer when timeLeft = 0
+    } else {
+        countdownTimer.textContent = "Time's up!";
+        clearInterval(timeInterval);
+        quiz.hidden = true;
+        quizComplete.hidden = false;
+    }
+};
 
 // display questions by index
 function displayNextQuestion() {
@@ -97,24 +98,57 @@ function displayNextQuestion() {
 
     if (q < quizQuestions.length) {
         q++
-        console.log ('q = ' + q)
-    // } else {
-    //     finalQuestion();
+        console.log('q = ' + q)
+        // } else {
+        //     finalQuestion();
     }
-}
+};
 
 // check if selected answer is correct
-var checkAnswer = function (click) {
-    click.preventDefault;
+function checkAnswer(click) {
     var selection = (choice = click.target).id
     console.log('you selected ' + selection);
-    if (selection === answer) {
-        correctAnswer()
-    } else if (selection !== answer) {
-        incorrectAnswer()
+        if (selection === answer) {
+            correctAnswer();
+         } else {
+            incorrectAnswer();
+    } 
+};
+
+// run if selected answer is correct
+function correctAnswer() {
+    score++;
+    console.log('score: ' + score)
+    result.textContent = "That is correct!";
+    result.className = 'select-correct';
+    if (q < quizQuestions.length) {
+        displayNextQuestion();
+    } else {
+        finalQuestion();
     }
+};
+
+// run if selected answer is incorrect
+function incorrectAnswer() {
+    // decrement 10 s for incorrect answer
+    console.log('score: ' + score);
+    result.textContent = "Sorry, that is incorrect.";
+    result.className = 'select-incorrect';
+    if (q < quizQuestions.length) {
+        displayNextQuestion();
+    } else {
+        finalQuestion();
+    }
+};
+
+function finalQuestion() {
+    clearInterval(timeInterval);
+    countdownTimer.textContent = "Congratulations, you have completed the quiz!";
+    choices.removeEventListener('click', checkAnswer);
+    viewScoreBtn.hidden = false;
+    viewScoreBtn.addEventListener('click', endOfQuiz);
 };
 
 // event listeners
 startBtn.addEventListener("click", startQuiz);
-quiz.addEventListener("click", checkAnswer);
+choices.addEventListener("click", checkAnswer);
