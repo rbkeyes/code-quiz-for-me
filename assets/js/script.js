@@ -56,21 +56,20 @@ var timeLeft = 59;
 var score = 0;
 
 
-function displayNextQuestion(q) {
-    let current = quizQuestions[q];
+// display questions by index
+function displayNextQuestion() {
+    var current = quizQuestions[q];
+    question.textContent = current.question;
+    choiceA.textContent = current.choiceA;
+    choiceB.textContent = current.choiceB;
+    choiceC.textContent = current.choiceC;
+    choiceD.textContent = current.choiceD;
+    answer = current.answer;
 
-question.textContent = current.question;
-    console.log(current.question);
-choiceA.textContent = current.choiceA;
-    console.log(current.choiceA);
-choiceB.textContent = current.choiceB;
-    console.log(current.choiceB);
-choiceC.textContent = current.choiceC;
-    console.log(current.choiceC);
-choiceD.textContent = current.choiceD;
-    console.log(current.choiceD);
-answer = current.answer;
-    console.log(current.answer);
+    if (q < quizQuestions.length) {
+        q++;
+        console.log('q = ' + q)
+    }
 }
 
 var checkAnswer = function(click) {
