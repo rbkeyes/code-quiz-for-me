@@ -1,5 +1,3 @@
-
-
 // set questions
 const quizQuestions = [
     {
@@ -72,31 +70,35 @@ function displayNextQuestion() {
     }
 }
 
-// check if selected answer is correct
-var checkAnswer = function (click) {
-    var selection = (choice = click.target).id
-    console.log('you selected ' + selection);
-    if (selection === answer) {
-        correctAnswer()
-    } else if (selection !== answer) {
-        incorrectAnswer()
+    // check if selected answer is correct
+    var checkAnswer = function (click) {
+        var selection = (choice = click.target).id
+        console.log(selection);
+        console.log('you selected ' + selection);
+        if (selection === answer) {
+            correctAnswer(); 
+            console.log("correct!");
+        } else {
+            incorrectAnswer();
+            console.log('incorrect')
+        }
     }
-};
-quiz.addEventListener("click", checkAnswer)
+    quiz.addEventListener("click", checkAnswer)
 
 
 // run if selected answer is correct
 function correctAnswer() {
-    score++;
-    console.log('score: ' + score)
-    result.textContent = "That is correct!";
-    result.className = 'select-correct';
-    if (q < quizQuestions.length) {
+    if (q < quiz.length) {
         displayNextQuestion();
     } else {
         finalQuestion();
     }
-};
+    score++;
+    console.log('score: ' + score)
+    result.textContent = "That is correct!";
+    result.className = 'select-correct';
+        choicesCorrect++;
+    };
 
 // run if selected answer is incorrect
 function incorrectAnswer() {
@@ -110,13 +112,28 @@ function incorrectAnswer() {
     }
 };
 
+function finalQuestion() {
+    clearInterval(countdown());
+    countdownTimer.textContent = "Congratulations, you have completed the quiz!";
+    quiz.removeEventListener('click', displayNextQuestion);
+    var viewScoreBtn = document.createElement('button');
+    viewScoreBtn.textContent = "View Final Score";
+    quiz.appendChild(viewScoreBtn);
+    viewScoreBtn.addEventListener('click', endOfQuiz);
+};
+
+function endOfQuiz() {
+    quiz.hidden = true;
+    quizComplete.hidden = false;
+    finalScore.textContent = score / choice.length
+}
 
 function countdown() {
     // select timer
     var countdownTimer = document.getElementById('countdown');
 
     // set interval
-    var timeInterval = setInterval(function () {
+   setInterval(function () {
         // decrement timer
         if (timeLeft >= 1) {
             countdownTimer.textContent = timeLeft;
