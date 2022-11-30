@@ -46,7 +46,8 @@ const quizComplete = document.getElementById("quiz-complete");
 // timer variables
 var countdownTimer = document.getElementById('countdown');
 var timeInterval;
-var timeLeft = 59;
+var timeLeft = 5;
+// remember to change back to 59 before submitting
 
 // quiz variables
 var quiz = document.getElementById("quiz");
@@ -87,12 +88,23 @@ function countdown() {
         timeLeft--;
         // set time's up message and clear timer when timeLeft = 0
     } else {
-        countdownTimer.textContent = "Time's up!";
-        clearInterval(timeInterval);
-        quiz.hidden = true;
-        quizComplete.hidden = false;
+        timesUp()
     }
 };
+
+function timesUp() {
+    viewFinalScore()
+    question.textContent = "Time's up! Click the button below to view your score."
+}
+
+// end of quiz (out of time or answered final question)
+function viewFinalScore() {
+    clearInterval(timeInterval);
+    countdownTimer.textContent = "0";
+    choices.hidden = true;
+    viewScoreBtn.hidden = false;
+    viewScoreBtn.addEventListener('click', saveYourScore);
+}
 
 // display questions by index
 function displayNextQuestion() {
@@ -156,21 +168,16 @@ function incorrectAnswer() {
 };
 
 function finalQuestion() {
-    choices.hidden=true;
-    clearInterval(timeInterval);
-    countdownTimer.textContent = "0";
+    viewFinalScore();
     question.textContent = "Congratulations! You have completed the quiz. Click the button below to view your score."
-    viewScoreBtn.hidden = false;
-    viewScoreBtn.addEventListener('click', endOfQuiz);
 };
 
-// end of quiz (out of time or answered final question)
-function endOfQuiz() {
+// upon out of time or answer final question
+function saveYourScore() {
     clearInterval(timeInterval);
     countdownTimer.textContent = "0";
-    quiz.hidden = true;
-    quizComplete.hidden = false;
-    finalScore.textContent = score / choice.length;
+    quiz.hidden=true;
+    quizComplete.hidden=false;
 }
 
 // event listeners
