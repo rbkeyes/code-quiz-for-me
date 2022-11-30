@@ -85,17 +85,30 @@ var checkAnswer = function (click) {
 quiz.addEventListener("click", checkAnswer)
 
 
+// run if selected answer is correct
 function correctAnswer() {
-    if (q < quiz.length) {
-        q = q++
-        displayNextQuestion(+1);
-        console.log(displ)
+    score++;
+    console.log('score: ' + score)
+    result.textContent = "That is correct!";
+    result.className = 'select-correct';
+    if (q < quizQuestions.length) {
+        displayNextQuestion();
+    } else {
+        finalQuestion();
     }
-        choicesCorrect++;
-        var result = document.createElement("h3");
-        result.textContent = "Correct!";
-        quiz.appendChild(result);
-    };
+};
+
+// run if selected answer is incorrect
+function incorrectAnswer() {
+// decrement 10 s for incorrect answer
+    result.textContent = "Sorry, that is incorrect.";
+    result.className = 'select-incorrect';
+    if (q < quizQuestions.length) {
+        displayNextQuestion();
+    } else {
+        finalQuestion();
+    }
+};
 
 
 function countdown() {
