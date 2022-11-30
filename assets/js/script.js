@@ -28,8 +28,8 @@ var myScore = document.getElementById("my-score");
 var finalScore;
 var initials = document.getElementById('initials');
 var userScores = {
-    userInitials: initials.value,
-    score: finalScore,
+    initials: [],
+    finalScore: [],
 }
 const saveBtn = document.querySelector('.save-button');
 
@@ -152,10 +152,16 @@ function endOfQuiz() {
 
 saveBtn.addEventListener('click', saveScore);
 function saveScore() { 
-    console.log(initials.value);
-    console.log(finalScore);
-    window.localStorage.setItem(initials.value, JSON.stringify(finalScore));
+    console.log(userScores);
+    window.localStorage.setItem('user scores', userScores);
 };
+
+function getSavedScores() {
+    var savedScores = document.getElementById('saved-scores');
+    savedScores.addEventListener('click', getSavedScores);
+    
+
+}
 
 // event listener for start button
 startBtn.addEventListener("click", startQuiz);
