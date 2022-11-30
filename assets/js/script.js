@@ -158,7 +158,7 @@ function incorrectAnswer() {
 function finalQuestion() {
     choices.hidden=true;
     clearInterval(timeInterval);
-    timeInterval.textContent = "0";
+    countdownTimer.textContent = "0";
     question.textContent = "Congratulations! You have completed the quiz. Click the button below to view your score."
     viewScoreBtn.hidden = false;
     viewScoreBtn.addEventListener('click', endOfQuiz);
@@ -166,9 +166,11 @@ function finalQuestion() {
 
 // end of quiz (out of time or answered final question)
 function endOfQuiz() {
+    clearInterval(timeInterval);
+    countdownTimer.textContent = "0";
     quiz.hidden = true;
     quizComplete.hidden = false;
-    finalScore.textContent = score / choice.length
+    finalScore.textContent = score / choice.length;
 }
 
 // event listeners
