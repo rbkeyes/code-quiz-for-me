@@ -34,6 +34,7 @@ const quizQuestions = [
 // get main section elements from HTML
 const startPage = document.getElementById("start-page");
 const startBtn = document.getElementById("start");
+const viewScoreBtn = document.getElementById('btn-save-score');
 const quizComplete = document.getElementById("quiz-complete");
 
 // get variables
@@ -64,8 +65,9 @@ function displayNextQuestion() {
     answer = current.answer;
 
     if (q < quizQuestions.length) {
-        q++;
-        console.log('q = ' + q)
+
+    } else {
+        finalQuestion();
     }
 }
 
@@ -107,39 +109,42 @@ function incorrectAnswer() {
 };
 
 function finalQuestion() {
-    clearInterval(countdownInterval);
+    // clearInterval(timeInterval);
     countdownTimer.textContent = "Congratulations, you have completed the quiz!";
-
     quiz.removeEventListener('click', displayNextQuestion);
-    
-    var viewScoreBtn = document.createElement('button');
     viewScoreBtn.textContent = "View Final Score";
     quiz.appendChild(viewScoreBtn);
     viewScoreBtn.addEventListener('click', endOfQuiz);
 };
 
 // set countdown timer
-const countdownInterval = setInterval(countdown, 1000)
 function countdown() {
-    if (timeLeft >= 1) {
-        countdownTimer.textContent = timeLeft;
-        timeLeft--;
-        // set 'time's up' message and clear timer when timeLeft = 0
-    } else {
-        countdownTimer.textContent = "Time's up!";
-        endOfQuiz()
-        return;
-        // Call the `saveScore()` function
-        // saveScore();
-    }
-    // }, 1000);
-}
+        // decrement timer
+        if (timeLeft >= 1) {
+            countdownTimer.textContent = timeLeft;
+            timeLeft--;
+            // set time's up message and clear timer when timeLeft = 0
+        } else {
+            countdownTimer.textContent = "Time's up!";
+            clearInterval(timeInterval);
+            quiz.hidden = true;
+            quizComplete.hidden = false;
+        }
+    };
+
 
 // end of quiz (out of time or answered final question)
 function endOfQuiz() {
     quiz.hidden = true;
     quizComplete.hidden = false;
     finalScore.textContent = score / choice.length
+}
+
+function saveScore() { 
+    let totalPoints = 0;
+    totalPoints += (correct/quiz.length);
+    // save score, initials to local storage
+    // submit button to save
 }
 
 // start quiz
@@ -149,7 +154,7 @@ function startQuiz() {
         quiz.hidden = false;
     }
     // start countdown
-    countdown();
+    var countdownTimer = setInterval(countdown, 1000);
     // display first question
     displayNextQuestion();
 }

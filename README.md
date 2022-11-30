@@ -20,3 +20,5 @@ https://github.com/mmeii/code-quiz/tree/main/Assets
 https://github.com/jorguzman100/04_Code_Quiz
 
 https://www.codingninjas.com/codestudio/library/how-to-create-a-quiz-app-using-javascript
+
+https://github.com/CodeExplainedRepo/Multiple-Choice-Quiz-JavaScript

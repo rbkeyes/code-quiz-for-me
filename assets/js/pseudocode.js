@@ -166,3 +166,27 @@ function startQuiz() {
 
 // event listener for start button, call startQuiz()
 startBtn.addEventListener("click", startQuiz);
+
+
+function finalQuestion() {
+    clearInterval(countdownInterval);
+    countdownTimer.textContent = "Congratulations, you have completed the quiz!";
+    // quiz.removeEventListener('click', displayNextQuestion);
+    var viewScoreBtn = document.getElementById('view-score-button');
+    viewScoreBtn.textContent = "View Final Score";
+    viewScoreBtn.addEventListener('click', endOfQuiz);
+};
+
+// set countdown timer
+const countdownInterval = setInterval(countdown, 1000)
+function countdown() {
+    if (timeLeft >= 1) {
+        countdownTimer.textContent = timeLeft;
+        timeLeft--;
+        // set 'time's up' message and clear timer when timeLeft = 0
+    } else {
+        countdownTimer.textContent = "Time's up!";
+        endOfQuiz()
+        return;
+    }
+}
