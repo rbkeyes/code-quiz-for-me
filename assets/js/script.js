@@ -72,18 +72,18 @@ function displayNextQuestion() {
     }
 }
 
-var checkAnswer = function(click) {
+// check if selected answer is correct
+var checkAnswer = function (click) {
     var selection = (choice = click.target).id
-    console.log(selection);
+    console.log('you selected ' + selection);
     if (selection === answer) {
-        correctAnswer(); 
-        console.log("correct!");
-    } else {
-        // incorrectAnswer()        
+        correctAnswer()
+    } else if (selection !== answer) {
+        incorrectAnswer()
     }
-}
-
+};
 quiz.addEventListener("click", checkAnswer)
+
 
 function correctAnswer() {
     if (q < quiz.length) {
