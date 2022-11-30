@@ -1,21 +1,5 @@
-// function saveScore() { 
-//     let totalPoints = 0;
-//     totalPoints += (correct/quiz.length);
-//     // save score, initials to local storage
-//     // submit button to save
-// }
-
-// // retrieve scores when "view high scores" is clicked.
-
-
-
-
-// function incorrectAnswer() {
-// timeLeft -+ 10;
-
-// }
-
-var quizQuestions = [
+// set questions
+const quizQuestions = [
     {
         question: "_______ is the process of finding errors and fixing them within a program.",
         choiceA: "compiling",
@@ -46,105 +30,126 @@ var quizQuestions = [
         answer: "D",
     }
 ]
-console.log(quizQuestions);
 
+// get main section elements from HTML
+const startPage = document.getElementById("start-page");
+const startBtn = document.getElementById("start");
+const quizComplete = document.getElementById("quiz-complete");
+
+// get variables
+var countdownTimer = document.getElementById('countdown');
+var quiz = document.getElementById("quiz");
+var question = document.getElementById("question");
+var choice = document.querySelectorAll(".choice");
+var choiceA = document.getElementById("A");
+var choiceB = document.getElementById("B");
+var choiceC = document.getElementById("C");
+var choiceD = document.getElementById("D");
+var finalScore = document.getElementById("my-score");
+var saveBtn = document.querySelector('.save-button');
+var result = document.getElementById('result');
+
+var q = 0
+var timeLeft = 59;
+var score = 0;
+
+// display questions by index
 function displayNextQuestion() {
-let currentQuestion = 0;
-let q = quizQuestions[currentQuestion];
+    var current = quizQuestions[q];
+    question.textContent = current.question;
+    choiceA.textContent = current.choiceA;
+    choiceB.textContent = current.choiceB;
+    choiceC.textContent = current.choiceC;
+    choiceD.textContent = current.choiceD;
+    answer = current.answer;
 
-question.textContent = q.question;
-console.log(q.question);
-choiceA.textContent = q.choiceA;
-console.log(q.choiceA);
-choiceB.textContent = q.choiceB;
-console.log(q.choiceB);
-choiceC.textContent = q.choiceC;
-console.log(q.choiceC);
-choiceD.textContent = q.choiceD;
-console.log(q.choiceD);
+    if (q < quizQuestions.length) {
+        q++;
+        console.log('q = ' + q)
+    }
+}
 
-answer = q.answer;
-console.log(q.answer);
+// check if selected answer is correct
+var checkAnswer = function (click) {
+    var selection = (choice = click.target).id
+    console.log('you selected ' + selection);
+    if (selection === answer) {
+        correctAnswer()
+    } else if (selection !== answer) {
+        incorrectAnswer()
+    }
+};
+quiz.addEventListener("click", checkAnswer)
 
-    if (currentQuestion < quiz.length) {
-        currentQuestion++
+// run if selected answer is correct
+function correctAnswer() {
+    score++;
+    console.log('score: ' + score)
+    result.textContent = "That is correct!";
+    result.className = 'select-correct';
+    if (q < quizQuestions.length) {
+        displayNextQuestion();
     } else {
-        // saveScore()
+        finalQuestion();
     }
+};
+
+// run if selected answer is incorrect
+function incorrectAnswer() {
+// decrement 10 s for incorrect answer
+    result.textContent = "Sorry, that is incorrect.";
+    result.className = 'select-incorrect';
+    if (q < quizQuestions.length) {
+        displayNextQuestion();
+    } else {
+        finalQuestion();
+    }
+};
+
+function finalQuestion() {
+    clearInterval(countdownInterval);
+    countdownTimer.textContent = "Congratulations, you have completed the quiz!";
+    // quiz.removeEventListener('click', displayNextQuestion);
+    var viewScoreBtn = document.getElementById('view-score-button');
+    viewScoreBtn.textContent = "View Final Score";
+    viewScoreBtn.addEventListener('click', endOfQuiz);
+};
+
+// set countdown timer
+const countdownInterval = setInterval(countdown, 1000)
+function countdown() {
+    if (timeLeft >= 1) {
+        countdownTimer.textContent = timeLeft;
+        timeLeft--;
+        // set 'time's up' message and clear timer when timeLeft = 0
+    } else {
+        countdownTimer.textContent = "Time's up!";
+        endOfQuiz()
+        return;
+        // Call the `saveScore()` function
+        // saveScore();
+    }
+    // }, 1000);
 }
 
-
-
-
-
-var quizQuestions = {
-    question: [
-        "_______ is the process of finding errors and fixing them within a program.",
-        "Which of the following variable types can hold a value of either true or false?",
-        "A loop that never ends is referred to as a(n)_________.",
-        "What is the name of the operation that joins two strings together?"
-    ],
-    choiceA: [
-        "compiling",
-        "boolean",
-        "while loop",
-        "function"
-    ],
-    choiceB: [
-        "executing",
-        "string",
-        "infinite loop",
-        "push"
-    ],
-    choiceC: [
-        "debugging",
-        "number",
-        "loop",
-        "join"
-    ],
-    choiceD: [
-        "scanning",
-        "array",
-        "loop",
-        "join",
-    ],
-    answer: ["C", "A", "B", "D"],
+// end of quiz (out of time or answered final question)
+function endOfQuiz() {
+    quiz.hidden = true;
+    quizComplete.hidden = false;
+    finalScore.textContent = score / choice.length
 }
 
-let q = 0;
-var currentQuestion = quizQuestions.question[q];
-var currentChoiceA = quizQuestions.choiceA[q];
-var currentChoiceB = quizQuestions.choiceB[q];
-var currentChoiceC = quizQuestions.choiceC[q];
-var currentChoiceD = quizQuestions.choiceD[q];
-var currentAnswer = quizQuestions.answer[q];
-
-// render next question to page
-function displayNextQuestion() {
-        question.textContent = currentQuestion;
-        console.log(currentQuestion);
-        choiceA.textContent = currentChoiceA;
-        console.log(currentChoiceA);
-        choiceB.textContent = currentChoiceB;
-        console.log(currentChoiceB);
-        choiceC.textContent = currentChoiceC;
-        console.log(currentChoiceC);
-        choiceD.textContent = currentChoiceD;
-        console.log(currentChoiceD);
-        answer = currentAnswer;
-        console.log(currentAnswer);
-
-
-        // if (choice == click.target) {
-        //     q++;
-        //     console.log(quizQuestions.question[q]);
-        //     console.log(quizQuestions.choiceA[q]);
-        //     console.log(quizQuestions.choiceB[q]);
-        //     console.log(quizQuestions.choiceC[q]);
-        //     console.log(quizQuestions.choiceD[q]);
-        //     console.log(quizQuestions.answer[q]);
-        // }
+// start quiz
+function startQuiz() {
+    if (startPage.hidden === false && quiz.hidden === true) {
+        startPage.hidden = true;
+        quiz.hidden = false;
     }
+    // start countdown
+    countdown();
+    // display first question
+    displayNextQuestion();
+}
 
-// startBtn.addEventListener("click", displayNextQuestion);
-// quiz.addEventListener("click", displayNextQuestion);
+// event listener for start button, call startQuiz()
+startBtn.addEventListener("click", startQuiz);

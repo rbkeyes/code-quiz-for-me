@@ -53,7 +53,6 @@ var q = 0
 var timeLeft = 59;
 var score = 0;
 
-
 // display questions by index
 function displayNextQuestion() {
     var current = quizQuestions[q];
@@ -63,7 +62,6 @@ function displayNextQuestion() {
     choiceC.textContent = current.choiceC;
     choiceD.textContent = current.choiceD;
     answer = current.answer;
-
     if (q < quizQuestions.length) {
         q++;
         console.log('q = ' + q)
@@ -85,7 +83,6 @@ function displayNextQuestion() {
     }
     quiz.addEventListener("click", checkAnswer)
 
-
 // run if selected answer is correct
 function correctAnswer() {
     if (q < quiz.length) {
@@ -97,7 +94,6 @@ function correctAnswer() {
     console.log('score: ' + score)
     result.textContent = "That is correct!";
     result.className = 'select-correct';
-        choicesCorrect++;
     };
 
 // run if selected answer is incorrect
@@ -155,9 +151,8 @@ function startQuiz() {
         startPage.hidden = true;
         quiz.hidden = false;
     }
-
     countdown();
-    displayNextQuestion(q=0);
+    displayNextQuestion();
 }
 
 startBtn.addEventListener("click", startQuiz);
