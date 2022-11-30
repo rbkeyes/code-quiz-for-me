@@ -30,4 +30,17 @@ body {
     margin: 5px;
 }
 
+.select-correct {
+    display: inline-block;
+    width: 25rem;
+    background-color:#B9E5E6;
+    padding:5px; border-radius:10px;
+}
+
+.select-incorrect {
+    display: inline-block;
+    width: 25rem;
+    background-color:#F5D0C8;
+    padding:5px; border-radius:10px;
+}
 

@@ -62,39 +62,37 @@ function displayNextQuestion() {
     choiceC.textContent = current.choiceC;
     choiceD.textContent = current.choiceD;
     answer = current.answer;
+
     if (q < quizQuestions.length) {
         q++;
         console.log('q = ' + q)
     }
 }
 
-    // check if selected answer is correct
-    var checkAnswer = function (click) {
-        var selection = (choice = click.target).id
-        console.log(selection);
-        console.log('you selected ' + selection);
-        if (selection === answer) {
-            correctAnswer(); 
-            console.log("correct!");
-        } else {
-            incorrectAnswer();
-            console.log('incorrect')
-        }
+// check if selected answer is correct
+var checkAnswer = function (click) {
+    var selection = (choice = click.target).id
+    console.log('you selected ' + selection);
+    if (selection === answer) {
+        correctAnswer()
+    } else if (selection !== answer) {
+        incorrectAnswer()
     }
-    quiz.addEventListener("click", checkAnswer)
+};
+quiz.addEventListener("click", checkAnswer)
 
 // run if selected answer is correct
 function correctAnswer() {
-    if (q < quiz.length) {
-        displayNextQuestion();
-    } else {
-        finalQuestion();
-    }
     score++;
     console.log('score: ' + score)
     result.textContent = "That is correct!";
     result.className = 'select-correct';
-    };
+    if (q < quizQuestions.length) {
+        displayNextQuestion();
+    } else {
+        finalQuestion();
+    }
+};
 
 // run if selected answer is incorrect
 function incorrectAnswer() {
@@ -109,50 +107,52 @@ function incorrectAnswer() {
 };
 
 function finalQuestion() {
-    clearInterval(countdown());
+    clearInterval(countdownInterval);
     countdownTimer.textContent = "Congratulations, you have completed the quiz!";
+
     quiz.removeEventListener('click', displayNextQuestion);
+    
     var viewScoreBtn = document.createElement('button');
     viewScoreBtn.textContent = "View Final Score";
     quiz.appendChild(viewScoreBtn);
     viewScoreBtn.addEventListener('click', endOfQuiz);
 };
 
+// set countdown timer
+const countdownInterval = setInterval(countdown, 1000)
+function countdown() {
+    if (timeLeft >= 1) {
+        countdownTimer.textContent = timeLeft;
+        timeLeft--;
+        // set 'time's up' message and clear timer when timeLeft = 0
+    } else {
+        countdownTimer.textContent = "Time's up!";
+        endOfQuiz()
+        return;
+        // Call the `saveScore()` function
+        // saveScore();
+    }
+    // }, 1000);
+}
+
+// end of quiz (out of time or answered final question)
 function endOfQuiz() {
     quiz.hidden = true;
     quizComplete.hidden = false;
     finalScore.textContent = score / choice.length
 }
 
-function countdown() {
-    // select timer
-    var countdownTimer = document.getElementById('countdown');
-
-    // set interval
-   setInterval(function () {
-        // decrement timer
-        if (timeLeft >= 1) {
-            countdownTimer.textContent = timeLeft;
-            timeLeft--;
-            // set time's up message and clear timer when timeLeft = 0
-        } else {
-            countdownTimer.textContent = "Time's up!";
-            clearInterval(timeInterval);
-            quiz.hidden = true;
-            quizComplete.hidden = false;
-            // Call the `saveScore()` function
-            // saveScore();
-        }
-    }, 1000);
-}
-
+// start quiz
 function startQuiz() {
     if (startPage.hidden === false && quiz.hidden === true) {
         startPage.hidden = true;
         quiz.hidden = false;
     }
+    // start countdown
     countdown();
+    // display first question
     displayNextQuestion();
 }
 
+// event listener for start button, call startQuiz()
 startBtn.addEventListener("click", startQuiz);

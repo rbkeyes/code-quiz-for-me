@@ -1,5 +1,18 @@
-// set questions
-const quizQuestions = [
+// function saveScore() { 
+//     let totalPoints = 0;
+//     totalPoints += (correct/quiz.length);
+//     // save score, initials to local storage
+//     // submit button to save
+// }
+
+// // retrieve scores when "view high scores" is clicked.
+
+
+
+
+
+
+var quizQuestions = [
     {
         question: "_______ is the process of finding errors and fixing them within a program.",
         choiceA: "compiling",
