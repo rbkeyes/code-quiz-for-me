@@ -1,21 +1,7 @@
-var startPage = document.getElementById("start-page");
-var startBtn = document.getElementById("start");
 
-var quiz = document.getElementById("quiz");
-var timeLeft = 59;
-var question = document.getElementById("question");
-var choice = document.querySelectorAll(".choice");
-var choiceA = document.getElementById("A");
-var choiceB = document.getElementById("B");
-var choiceC = document.getElementById("C");
-var choiceD = document.getElementById("D");
-var choicesCorrect = 0;
 
-var quizComplete = document.getElementById("quiz-complete");
-var finalScore = document.getElementById("my-score");
-var saveBtn = document.querySelector('.save-button');
-
-var quizQuestions = [
+// set questions
+const quizQuestions = [
     {
         question: "_______ is the process of finding errors and fixing them within a program.",
         choiceA: "compiling",
@@ -46,6 +32,28 @@ var quizQuestions = [
         answer: "D",
     }
 ]
+
+// get main section elements from HTML
+const startPage = document.getElementById("start-page");
+const startBtn = document.getElementById("start");
+const quizComplete = document.getElementById("quiz-complete");
+
+// get variables
+var countdownTimer = document.getElementById('countdown');
+var quiz = document.getElementById("quiz");
+var question = document.getElementById("question");
+var choice = document.querySelectorAll(".choice");
+var choiceA = document.getElementById("A");
+var choiceB = document.getElementById("B");
+var choiceC = document.getElementById("C");
+var choiceD = document.getElementById("D");
+var finalScore = document.getElementById("my-score");
+var saveBtn = document.querySelector('.save-button');
+var result = document.getElementById('result');
+
+var q = 0
+var timeLeft = 59;
+var score = 0;
 
 
 function displayNextQuestion(q) {
