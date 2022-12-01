@@ -1,3 +1,6 @@
+// view high scores variables
+var viewSavedScores = document.getElementById('view-high-scores');
+
 // start page variables
 const startPage = document.getElementById("start-page");
 const startBtn = document.getElementById("start");
@@ -28,8 +31,8 @@ var myScore = document.getElementById("my-score");
 var finalScore;
 var initials = document.getElementById('initials');
 var userScores = {
-    initials: [],
-    finalScore: [],
+    savedInitials: [],
+    savedScore: [],
 }
 const saveBtn = document.querySelector('.save-button');
 
@@ -150,17 +153,17 @@ function endOfQuiz() {
     quizComplete.hidden=false;
 };
 
-saveBtn.addEventListener('click', saveScore);
-function saveScore() { 
+saveBtn.addEventListener('click', saveUserScore);
+function saveUserScore() { 
+    userScores.savedInitials.push(initials.value);
+    userScores.savedScore.push(finalScore);
+    window.localStorage.setItem('saved-scores', (JSON.stringify(userScores)));
     console.log(userScores);
-    window.localStorage.setItem('user scores', userScores);
 };
 
+viewSavedScores.addEventListener('click', getSavedScores);
 function getSavedScores() {
-    var savedScores = document.getElementById('saved-scores');
-    savedScores.addEventListener('click', getSavedScores);
-    
-
+//    retrieve from local storage and display in "recent high scores"
 }
 
 // event listener for start button

@@ -15,7 +15,7 @@
     <!-- header -->
     <header>
         <h1>Coding Quiz</h1>
-        <h4 id="saved-scores">View high scores</h4>
+        <h4 id="view-high-scores">View high scores</h4>
         <h4> Time remaining: <span id="countdown">60</span>
             <h4>
     </header>
@@ -23,6 +23,19 @@
     <!-- main -->
     <main id="container">
 
+        <!-- view high scores -->
+        <section id="scoreboard" hidden>
+            <h2>Recent High Scores</h2>
+            <ol>
+                <li class='userHighScore'></li>
+                <li class='userHighScore'></li>
+                <li class='userHighScore'></li>
+                <li class='userHighScore'></li>
+                <li class='userHighScore'></li>
+            </ol>
+        </section>
+
+        <!-- start page -->
         <section id="start-page">
             <h2>How to get started:</h2>
             <p>Try to answer all of the multiple choice questions before time runs out! Any incorrect answer will deduct
