@@ -157,13 +157,15 @@ saveBtn.addEventListener('click', saveUserScore);
 function saveUserScore() { 
     userScores.savedInitials.push(initials.value);
     userScores.savedScore.push(finalScore);
-    window.localStorage.setItem('saved-scores', (JSON.stringify(userScores)));
+    localStorage.setItem('saved-scores', (JSON.stringify(userScores)));
     console.log(userScores);
 };
 
-viewSavedScores.addEventListener('click', getSavedScores);
-function getSavedScores() {
-//    retrieve from local storage and display in "recent high scores"
+viewSavedScores.addEventListener('click', getSavedScoresFromStorage);
+function getSavedScoresFromStorage() {
+    var getScores = localStorage.getItem('saved-scores');
+    var parseScores = JSON.parse(getScores);
+    console.log(parseScores);
 }
 
 // event listener for start button
