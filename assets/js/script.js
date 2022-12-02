@@ -30,11 +30,12 @@ var score = 0;
 var myScore = document.getElementById("my-score");
 var finalScore;
 var initials = document.getElementById('initials');
-var userScores = {
-    savedInitials: [],
-    savedScore: [],
-}
+var savedScores = [];
 const saveBtn = document.querySelector('.save-button');
+
+var retrievedScores = []
+const scoreboard = document.getElementById('scoreboard');
+var userHighScore = document.querySelectorAll('.userHighScore');
 
 // start quiz
 function startQuiz() {
@@ -155,17 +156,34 @@ function endOfQuiz() {
 
 saveBtn.addEventListener('click', saveUserScore);
 function saveUserScore() { 
-    userScores.savedInitials.push(initials.value);
-    userScores.savedScore.push(finalScore);
-    localStorage.setItem('saved-scores', (JSON.stringify(userScores)));
-    console.log(userScores);
+    savedScores.push(initials.value + ' : ' + finalScore + '%');
+    console.log('savedScores');
+    console.log(savedScores);
+    localStorage.setItem('saved-scores', (JSON.stringify(savedScores)));
+    console.log('saved to local storage: ')
+    console.log(localStorage);
+    savedScores = [];
+    viewScoreboard();
 };
 
-viewSavedScores.addEventListener('click', getSavedScoresFromStorage);
-function getSavedScoresFromStorage() {
-    var getScores = localStorage.getItem('saved-scores');
-    var parseScores = JSON.parse(getScores);
-    console.log(parseScores);
+function viewScoreboard() {
+    quizComplete.hidden=true;
+    scoreboard.hidden=false;
+    for (var i = 0; i< userHighScore.length; i++) {
+        userHighScore[i].textContent = savedScores[i];
+    }
+}
+
+viewSavedScores.addEventListener('click', getSavedScores);
+function getSavedScores() {
+    var getScores = JSON.parse(localStorage.getItem('saved-scores'));
+    if (getScores !== null) {
+        console.log('scores retrieved')
+        console.log(getScores);
+    savedScores.push(getScores);
+    console.log(savedScores);
+    }
+    viewScoreboard();
 }
 
 // event listener for start button
