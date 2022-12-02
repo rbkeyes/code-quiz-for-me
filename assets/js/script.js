@@ -54,9 +54,8 @@ function countdown() {
         countdownTimer.textContent = timeLeft;
         timeLeft--;
     } else {
-        question.textContent = "Time's up! Click the button below to view your score."}
         allOver();
-        console.log(question.textContent);
+        question.textContent = "Time's up! Click the button below to view your score."}
     };
 
 // end of quiz (out of time or answered final question)

@@ -57,13 +57,11 @@ button:hover {
 }
 
 .select-correct {
-    /* display: inline-block; */
     width: 25rem;
     color: var(--gold);
 }
 
 .select-incorrect {
-    /* display: inline-block; */
     width: 25rem;
     background-color:#F5D0C8;
     padding:5px; border-radius:10px;
