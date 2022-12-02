@@ -1,3 +1,5 @@
+
+
 // start page variables
 const startPage = document.getElementById("start-page");
 const startBtn = document.getElementById("start");
@@ -5,7 +7,7 @@ const startBtn = document.getElementById("start");
 // timer variables
 var countdownTimer = document.getElementById('countdown');
 var timeInterval;
-var timeLeft = 2;
+var timeLeft = 5;
 // remember to change back to 59 before submitting
 
 // quiz variables
@@ -51,17 +53,17 @@ function countdown() {
     if (timeLeft >= 1) {
         countdownTimer.textContent = timeLeft;
         timeLeft--;
+        // set time's up message and clear timer when timeLeft = 0
     } else {
-        question.textContent = "Time's up! Click the button below to view your score."}
         allOver();
-    };
+        question.textContent = "Time's up! Click the button below to view your score."}
+};
 
 // end of quiz (out of time or answered final question)
 function allOver() {
     clearInterval(timeInterval);
     countdownTimer.textContent = "0";
     choices.hidden = true;
-    console.log(choices.hidden);
     viewFinalScoreBtn.hidden = false;
     viewFinalScoreBtn.addEventListener('click', endOfQuiz);
 }
@@ -116,7 +118,6 @@ function correctAnswer() {
 // run if selected answer is incorrect
 function incorrectAnswer() {
     // decrement 10 s for incorrect answer
-    timeLeft -= 10;
     console.log('score: ' + score);
     result.textContent = "Sorry, that is incorrect.";
     result.className = 'select-incorrect';
@@ -127,15 +128,14 @@ function incorrectAnswer() {
     }
 };
 
-// display after final question
+// 
 function finalQuestion() {
     allOver();
     question.textContent = "Congratulations! You have completed the quiz. Click the button below to view your score."
 };
 
-// calculate score
 function percentCorrect() {
-    finalScore = Math.floor((score/(quizQuestions.length-1))*100);
+    finalScore = (score/(quizQuestions.length-1))*100;
     console.log(finalScore);
     myScore.textContent = finalScore;
 }; 
@@ -167,6 +167,7 @@ function saveUserScore() {
 // "view high scores" variables
 const viewSavedScores = document.getElementById('view-high-scores');
 var backToStart = document.getElementById('to-start-page');
+
 // render scores to scoreboard
 function viewScoreboard() {
     startPage.hidden=true;
@@ -198,4 +199,3 @@ function returnToStartPage() {
 
 // event listener for start button
 startBtn.addEventListener("click", startQuiz);
-
