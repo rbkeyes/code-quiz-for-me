@@ -33,3 +33,5 @@ https://github.com/CodeExplainedRepo/Multiple-Choice-Quiz-JavaScript
 
 [glow effect](https://codersblock.com/blog/creating-glow-effects-with-css/)
 
+[CSS reset](https://meyerweb.com/eric/tools/css/reset/)
+

@@ -5,7 +5,7 @@ const startBtn = document.getElementById("start");
 // timer variables
 var countdownTimer = document.getElementById('countdown');
 var timeInterval;
-var timeLeft = 59;
+var timeLeft = 2;
 // remember to change back to 59 before submitting
 
 // quiz variables
@@ -51,17 +51,17 @@ function countdown() {
     if (timeLeft >= 1) {
         countdownTimer.textContent = timeLeft;
         timeLeft--;
-        // set time's up message and clear timer when timeLeft = 0
     } else {
-        allOver();
         question.textContent = "Time's up! Click the button below to view your score."}
-};
+        allOver();
+    };
 
 // end of quiz (out of time or answered final question)
 function allOver() {
     clearInterval(timeInterval);
     countdownTimer.textContent = "0";
     choices.hidden = true;
+    console.log(choices.hidden);
     viewFinalScoreBtn.hidden = false;
     viewFinalScoreBtn.addEventListener('click', endOfQuiz);
 }
@@ -127,12 +127,13 @@ function incorrectAnswer() {
     }
 };
 
-// 
+// display after final question
 function finalQuestion() {
     allOver();
     question.textContent = "Congratulations! You have completed the quiz. Click the button below to view your score."
 };
 
+// calculate score
 function percentCorrect() {
     finalScore = Math.floor((score/(quizQuestions.length-1))*100);
     console.log(finalScore);

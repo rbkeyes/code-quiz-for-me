@@ -8,9 +8,13 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Rubik', sans-serif;
     color: var(--dark-green);
     background-color: var(--parchment);
+}
+
+h1 {
+    
 }
 
 main {
@@ -24,37 +28,35 @@ button {
     margin: 10px;
 }
 
+button:hover {
+    box-shadow: 0 0 5px 5px var(--hot-pink)
+}
+
+ol {
+    display: inline-block;
+    margin-left:0px;
+    padding-left:0px;
+    width: 75vw;
+}
+
 .choice {
-    width: 20rem;
+    width: 25em;
     line-height: 2;
-    list-style-type: none;
+    list-style: none;
     color: var(--parchment);
-    background-color: var(--dark-green);
+    background-color: var(--gold);
     padding: 4px;
     border-radius: 10px;
-    margin: 10px;
+    margin: 10px 10px 10px 0;
 }
 
 .choice:hover {
-    box-shadow: 0 0 5px 5px var(--gold)
+    box-shadow: 0 0 5px 5px var(--hot-pink)
 }
 
-.btn-next {
-    margin: 5px;
-    color: var(--parchment);
-    background-color: var(--gold);
+.select-correct, .select-incorrect {
+    font-style: italic;
 }
 
-.select-correct {
-    /* display: inline-block; */
-    width: 25rem;
-    color: var(--gold);
-}
 
-.select-incorrect {
-    /* display: inline-block; */
-    width: 25rem;
-    background-color:#F5D0C8;
-    padding:5px; border-radius:10px;
-}
 
