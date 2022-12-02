@@ -7,7 +7,7 @@ const startBtn = document.getElementById("start");
 // timer variables
 var countdownTimer = document.getElementById('countdown');
 var timeInterval;
-var timeLeft = 5;
+var timeLeft = 60;
 // remember to change back to 59 before submitting
 
 // quiz variables

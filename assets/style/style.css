@@ -11,10 +11,7 @@ body {
     font-family: 'Rubik', sans-serif;
     color: var(--dark-green);
     background-color: var(--parchment);
-}
-
-h1 {
-    
+    font-size: 100%;
 }
 
 main {
@@ -39,7 +36,7 @@ ol {
 }
 
 .choice {
-    width: 25em;
+    width: 15rem;
     line-height: 2;
     list-style: none;
     color: var(--parchment);

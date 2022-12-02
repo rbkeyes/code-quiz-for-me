@@ -29,11 +29,11 @@ const quizQuestions = [
         choiceD: "D:  concatenation",
         answer: "D",
     }, {
-        question: "How would you access all HTML elements with a specific class using javascript?",
-        choiceA: "A:  document.querySelector()",
-        choiceB: "B:  querySelectorAll()",
-        choiceC: "C:  document.getElementByClassName()",
-        choiceD: "D:  document.querySelectorAll()",
+        question: "You would access all HTML elements with a specific class using document____________",
+        choiceA: "A:  .querySelector()",
+        choiceB: "B:  querySelectorAll",
+        choiceC: "C:  .getClass()",
+        choiceD: "D:  .querySelectorAll()",
         answer: "D",
     }, {
         question: "What symbol in your code indicates you are using jQuery?", 
