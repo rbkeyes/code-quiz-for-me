@@ -29,7 +29,7 @@ button:hover {
     box-shadow: 0 0 5px 5px var(--hot-pink)
 }
 
-ol {
+.choices {
     margin-left:0px;
     padding-left:0px;
     width: 75vw;

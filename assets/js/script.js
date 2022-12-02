@@ -56,6 +56,7 @@ function countdown() {
     } else {
         question.textContent = "Time's up! Click the button below to view your score."}
         allOver();
+        console.log(question.textContent);
     };
 
 // end of quiz (out of time or answered final question)
@@ -63,7 +64,6 @@ function allOver() {
     clearInterval(timeInterval);
     countdownTimer.textContent = "0";
     choices.hidden = true;
-    console.log(choices.hidden);
     viewFinalScoreBtn.hidden = false;
     viewFinalScoreBtn.addEventListener('click', endOfQuiz);
 }
