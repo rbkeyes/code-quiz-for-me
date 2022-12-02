@@ -30,11 +30,11 @@ var score = 0;
 var myScore = document.getElementById("my-score");
 var finalScore;
 var initials = document.getElementById('initials');
-var savedScores = [];
+var userScores = [];
 const saveBtn = document.querySelector('.save-button');
 
 const scoreboard = document.getElementById('scoreboard');
-var userHighScore = document.querySelectorAll('.userHighScore');
+var highScore = document.querySelector('.userHighScore');
 
 // start quiz
 function startQuiz() {
@@ -156,13 +156,16 @@ function endOfQuiz() {
 saveBtn.addEventListener('click', saveUserScore);
 function saveUserScore() { 
     getSavedScores()
-    savedScores.push(initials.value + ': ' + finalScore + '%');
+    console.log(userScores);
+    userScores.push(initials.value + ': ' + finalScore + '%');
     console.log('savedScores');
-    console.log(savedScores);
-    localStorage.setItem('saved-scores', (JSON.stringify(savedScores)));
+    console.log(userScores);
+    localStorage.setItem('saved-scores', (JSON.stringify(userScores)));
     console.log('saved to local storage: ')
     console.log(localStorage);
-    savedScores = [];
+    userScores;
+    console.log("clear user scores");
+    console.log(userScores);
     viewScoreboard();
 };
 
@@ -171,8 +174,8 @@ function viewScoreboard() {
     quiz.hidden=true;
     quizComplete.hidden=true;
     scoreboard.hidden=false;
-    for (var i = 0; i< userHighScore.length; i++) {
-        userHighScore[i].textContent = savedScores[i];
+    for (var i = 0; i< highScore.length; i++) {
+        highScore[i].textContent = userScores[i];
     }
 }
 
@@ -180,14 +183,13 @@ viewSavedScores.addEventListener('click', getSavedScores);
 function getSavedScores() {
     var getScores = JSON.parse(localStorage.getItem('saved-scores'));
     if (getScores !== null) {
-        console.log('scores retrieved')
-        console.log(getScores);
-    savedScores.push(getScores);
-    
-    console.log(savedScores);
-    }
-    viewScoreboard();
+    console.log(getScores);
+    userScores = getScores;
+    console.log(userScores);
+} 
+viewScoreboard();
 }
 
 // event listener for start button
 startBtn.addEventListener("click", startQuiz);
+
