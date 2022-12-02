@@ -34,6 +34,7 @@ var userScores = [];
 const saveBtn = document.querySelector('.save-button');
 
 const scoreboard = document.getElementById('scoreboard');
+var topFiveScores = document.getElementById('topFive')
 var highScore = document.querySelector('.userHighScore');
 
 // start quiz
@@ -174,9 +175,14 @@ function viewScoreboard() {
     quiz.hidden=true;
     quizComplete.hidden=true;
     scoreboard.hidden=false;
-    for (var i = 0; i< highScore.length; i++) {
-        highScore[i].textContent = userScores[i];
-    }
+    console.log(topFiveScores);
+    console.log(highScore);
+    // get variables for each li of scoreboard
+    // or
+    // create elements using javascript and append.child() to list top 5?
+    // for (var i = 0; i< highScore.length; i++) {
+    //     highScore[i].textContent = userScores[i];
+    // }
 }
 
 viewSavedScores.addEventListener('click', getSavedScores);
