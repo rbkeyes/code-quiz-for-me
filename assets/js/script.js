@@ -1,5 +1,4 @@
-// view high scores variables
-const viewSavedScores = document.getElementById('view-high-scores');
+
 
 // start page variables
 const startPage = document.getElementById("start-page");
@@ -56,7 +55,8 @@ function countdown() {
         timeLeft--;
         // set time's up message and clear timer when timeLeft = 0
     } else {
-        question.textContent = "Time's up! Click the button below to view your score."    }
+        allOver();
+        question.textContent = "Time's up! Click the button below to view your score."}
 };
 
 // end of quiz (out of time or answered final question)
@@ -128,6 +128,7 @@ function incorrectAnswer() {
     }
 };
 
+// 
 function finalQuestion() {
     allOver();
     question.textContent = "Congratulations! You have completed the quiz. Click the button below to view your score."
@@ -156,25 +157,30 @@ function saveUserScore() {
     localStorage.setItem('saved-scores', (JSON.stringify(userScores)));
     console.log('saved to local storage: ')
     console.log(localStorage);
+    // empty userScores variable after saving to storage to avoid array within an array, avoid dupli
     userScores;
     console.log("clear user scores");
     console.log(userScores);
     viewScoreboard();
 };
 
+// "view high scores" variables
+const viewSavedScores = document.getElementById('view-high-scores');
+var backToStart = document.getElementById('to-start-page');
+
+// render scores to scoreboard
 function viewScoreboard() {
     startPage.hidden=true;
     quiz.hidden=true;
     quizComplete.hidden=true;
     scoreboard.hidden=false;
-    for (var s = 0; s < 5; s++){
+    for (var s = 0; s < userScores.length; s++){
         highScore = (document.getElementById(s + 1).textContent = userScores[s]);
         console.log(highScore);
     } 
-
     }
 
-
+// get saved scored when "view saved scores" is clicked
 viewSavedScores.addEventListener('click', getSavedScores);
 function getSavedScores() {
     var getScores = JSON.parse(localStorage.getItem('saved-scores'));
@@ -184,6 +190,11 @@ function getSavedScores() {
     console.log(userScores);
 } 
 viewScoreboard();
+}
+
+backToStart.addEventListener('click', returnToStartPage)
+function returnToStartPage() {
+    location.reload()
 }
 
 // event listener for start button
