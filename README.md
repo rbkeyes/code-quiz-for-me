@@ -26,3 +26,10 @@ https://github.com/CodeExplainedRepo/Multiple-Choice-Quiz-JavaScript
 
 
 [get values from array](https://www.geeksforgeeks.org/javascript-array-values/)
+
+[location.reload()](https://developer.mozilla.org/en-US/docs/Web/API/Location/reload);
+
+[saving scores to local storage](https://michael-karen.medium.com/how-to-save-high-scores-in-local-storage-7860baca9d68)
+
+[glow effect](https://codersblock.com/blog/creating-glow-effects-with-css/)
+

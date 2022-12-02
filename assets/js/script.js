@@ -1,5 +1,3 @@
-
-
 // start page variables
 const startPage = document.getElementById("start-page");
 const startBtn = document.getElementById("start");
@@ -7,7 +5,7 @@ const startBtn = document.getElementById("start");
 // timer variables
 var countdownTimer = document.getElementById('countdown');
 var timeInterval;
-var timeLeft = 5;
+var timeLeft = 59;
 // remember to change back to 59 before submitting
 
 // quiz variables
@@ -118,6 +116,7 @@ function correctAnswer() {
 // run if selected answer is incorrect
 function incorrectAnswer() {
     // decrement 10 s for incorrect answer
+    timeLeft -= 10;
     console.log('score: ' + score);
     result.textContent = "Sorry, that is incorrect.";
     result.className = 'select-incorrect';
@@ -135,7 +134,7 @@ function finalQuestion() {
 };
 
 function percentCorrect() {
-    finalScore = (score/(quizQuestions.length-1))*100;
+    finalScore = Math.floor((score/(quizQuestions.length-1))*100);
     console.log(finalScore);
     myScore.textContent = finalScore;
 }; 
@@ -167,7 +166,6 @@ function saveUserScore() {
 // "view high scores" variables
 const viewSavedScores = document.getElementById('view-high-scores');
 var backToStart = document.getElementById('to-start-page');
-
 // render scores to scoreboard
 function viewScoreboard() {
     startPage.hidden=true;
