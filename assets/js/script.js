@@ -33,7 +33,6 @@ var initials = document.getElementById('initials');
 var savedScores = [];
 const saveBtn = document.querySelector('.save-button');
 
-var retrievedScores = []
 const scoreboard = document.getElementById('scoreboard');
 var userHighScore = document.querySelectorAll('.userHighScore');
 
@@ -156,7 +155,8 @@ function endOfQuiz() {
 
 saveBtn.addEventListener('click', saveUserScore);
 function saveUserScore() { 
-    savedScores.push(initials.value + ' : ' + finalScore + '%');
+    getSavedScores()
+    savedScores.push(initials.value + ': ' + finalScore + '%');
     console.log('savedScores');
     console.log(savedScores);
     localStorage.setItem('saved-scores', (JSON.stringify(savedScores)));
@@ -167,6 +167,8 @@ function saveUserScore() {
 };
 
 function viewScoreboard() {
+    startPage.hidden=true;
+    quiz.hidden=true;
     quizComplete.hidden=true;
     scoreboard.hidden=false;
     for (var i = 0; i< userHighScore.length; i++) {
@@ -181,6 +183,7 @@ function getSavedScores() {
         console.log('scores retrieved')
         console.log(getScores);
     savedScores.push(getScores);
+    
     console.log(savedScores);
     }
     viewScoreboard();
