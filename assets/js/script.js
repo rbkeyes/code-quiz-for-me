@@ -1,5 +1,5 @@
 // view high scores variables
-var viewSavedScores = document.getElementById('view-high-scores');
+const viewSavedScores = document.getElementById('view-high-scores');
 
 // start page variables
 const startPage = document.getElementById("start-page");
@@ -31,11 +31,9 @@ var myScore = document.getElementById("my-score");
 var finalScore;
 var initials = document.getElementById('initials');
 var userScores = [];
-const saveBtn = document.querySelector('.save-button');
+const saveBtn = document.getElementById('save-button');
 
 const scoreboard = document.getElementById('scoreboard');
-var topFiveScores = document.getElementById('topFive')
-var highScore = document.querySelector('.userHighScore');
 
 // start quiz
 function startQuiz() {
@@ -58,14 +56,8 @@ function countdown() {
         timeLeft--;
         // set time's up message and clear timer when timeLeft = 0
     } else {
-        timesUp()
-    }
+        question.textContent = "Time's up! Click the button below to view your score."    }
 };
-
-function timesUp() {
-    allOver()
-    question.textContent = "Time's up! Click the button below to view your score."
-}
 
 // end of quiz (out of time or answered final question)
 function allOver() {
@@ -175,15 +167,13 @@ function viewScoreboard() {
     quiz.hidden=true;
     quizComplete.hidden=true;
     scoreboard.hidden=false;
-    console.log(topFiveScores);
-    console.log(highScore);
-    // get variables for each li of scoreboard
-    // or
-    // create elements using javascript and append.child() to list top 5?
-    // for (var i = 0; i< highScore.length; i++) {
-    //     highScore[i].textContent = userScores[i];
-    // }
-}
+    for (var s = 0; s < 5; s++){
+        highScore = (document.getElementById(s + 1).textContent = userScores[s]);
+        console.log(highScore);
+    } 
+
+    }
+
 
 viewSavedScores.addEventListener('click', getSavedScores);
 function getSavedScores() {
