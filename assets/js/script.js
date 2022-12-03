@@ -116,7 +116,7 @@ function correctAnswer() {
 
 // run if selected answer is incorrect
 function incorrectAnswer() {
-    // decrement 10 s for incorrect answer
+    timeLeft -= 10;
     console.log('score: ' + score);
     result.textContent = "Sorry, that is incorrect.";
     result.className = 'select-incorrect';
@@ -199,3 +199,10 @@ function returnToStartPage() {
 
 // event listener for start button
 startBtn.addEventListener("click", startQuiz);
+
+var numArray = [140000, 104, 99];
+numArray.sort(function(a, b) {
+  return a - b;
+});
+
+console.log(numArray);

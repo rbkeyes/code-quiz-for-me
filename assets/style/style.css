@@ -1,24 +1,51 @@
 :root {
-    --gold: #daaa0c;
-    --pale-gold: #f5e2b3 ;
-    --parchment: #f4ecd7;
-    --hot-pink: #f258c2;
+    --canary: #e5ff9d;
+    --clay-ash: #c7d0c3 ;
+    --lilac: #be9abd;
+    --buddha-gold: #a29d02;
     --dark-green: #264750;
 
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
+    font-size: 100%;
     font-family: Arial, Helvetica, sans-serif;
     color: var(--dark-green);
-    background-color: var(--parchment);
+    background-color: var(--clay-ash);
     font-size: 100%;
 }
 
-main {
-    color: var(--dark-green);
-    background-color: var(--pale-gold);
+header {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+h4 {
+    font-size: 1.25rem;
+    display:inline-block;
+    margin: .25rem;
+}
+
+#container {
+    color: var(--clay-ash);
+    background-color: var(--dark-green);
     padding: 25px;
     border-radius: 10px;
+    margin: 3em;
 }
 
 button {
@@ -26,44 +53,40 @@ button {
 }
 
 button:hover {
-    box-shadow: 0 0 5px 5px var(--hot-pink)
+    box-shadow: 0 0 3px 3px var(--canary)
 }
 
-.choices {
+ol {
     margin-left:0px;
     padding-left:0px;
     width: 75vw;
 }
 
 .choice {
-    width: 15rem;
+    font-weight: bolder;
+    width: 12rem;
     line-height: 2;
     list-style-type: none;
-    color: var(--parchment);
-    background-color: var(--dark-green);
+    color: var(--dark-green);
+    background-color: var(--buddha-gold);
     padding: 4px;
     border-radius: 10px;
-    margin: 10px;
+    margin-bottom: 10px;
 }
 
 .choice:hover {
-    box-shadow: 0 0 5px 5px var(--gold)
+    box-shadow: 0 0 3px 3px var(--canary)
 }
 
 .btn-next {
     margin: 5px;
-    color: var(--parchment);
-    background-color: var(--gold);
+
 }
 
-.select-correct {
-    width: 25rem;
-    color: var(--gold);
+.select-correct, .select-incorrect {
+    font-style: italic;
+    color: var(--dark-green);
+    
 }
 
-.select-incorrect {
-    width: 25rem;
-    background-color:#F5D0C8;
-    padding:5px; border-radius:10px;
-}
 
