@@ -151,7 +151,8 @@ saveBtn.addEventListener('click', saveUserScore);
 function saveUserScore() { 
     getSavedScores()
     // savedInitials.push(initials.value);
-    savedScores.push(initials.value + ': ' + finalScore);
+    savedInitials.push(initials.value);
+    savedScores.push(finalScore);
     localStorage.setItem("savedInitials", (JSON.stringify(savedInitials)));
     localStorage.setItem("savedScores", (JSON.stringify(savedScores)));
     console.log('saved to local storage: ')
@@ -176,16 +177,16 @@ function viewScoreboard() {
     } 
     }
 
-function renderHighScores() {
-    for (var i=0; i<getScores.length; i++) {
+// function renderHighScores() {
+//     for (var i=0; i<getScores.length; i++) {
         
 
-const fruits = ["Banana", "Orange", "Apple", "Mango"];
-fruits.sort();
-fruits.reverse();
-document.getElementById("demo").innerHTML = fruits;
-    }
-}
+// const fruits = ["Banana", "Orange", "Apple", "Mango"];
+// fruits.sort();
+// fruits.reverse();
+// document.getElementById("demo").innerHTML = fruits;
+//     }
+// }
 
 // get saved scored when "view saved scores" is clicked
 viewSavedScores.addEventListener('click', getSavedScores);
