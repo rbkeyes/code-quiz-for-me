@@ -27,7 +27,8 @@ var score = 0;
 var myScore = document.getElementById("my-score");
 var finalScore;
 var initials = document.getElementById('initials');
-var userScores = [];
+var savedInitials = [];
+var savedScores = [];
 const saveBtn = document.getElementById('save-button');
 
 const scoreboard = document.getElementById('scoreboard');
@@ -148,15 +149,15 @@ function endOfQuiz() {
 saveBtn.addEventListener('click', saveUserScore);
 function saveUserScore() { 
     getSavedScores()
-    console.log(userScores);
-    userScores.push(initials.value + ': ' + finalScore);
-    console.log('savedScores');
-    console.log(userScores);
-    localStorage.setItem('saved-scores', (JSON.stringify(userScores)));
+    savedInitials.push(initials.value);
+    savedScores.push(finalScore);
+    localStorage.setItem('initials', (JSON.stringify(savedInitials)));
+    localStorage.setItem('score', (JSON.stringify(savedScores)));
     console.log('saved to local storage: ')
     console.log(localStorage);
     // empty userScores variable after saving to storage to avoid array within an array, avoid duplicate
-    userScores;
+    savedInitials;
+    savedScores;
     console.log("clear user scores");
     console.log(userScores);
     viewScoreboard();
