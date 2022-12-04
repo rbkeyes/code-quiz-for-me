@@ -166,8 +166,21 @@ function saveUserScore() {
 const viewSavedScores = document.getElementById('view-high-scores');
 var backToStart = document.getElementById('to-start-page');
 
+// get saved scored when "view saved scores" is clicked
+viewSavedScores.addEventListener('click', getSavedScores);
+function getSavedScores() {
+    var getScores = JSON.parse(localStorage.getItem('saved-scores'));
+    if (getScores !== null) {
+        console.log(getScores);
+        userScores = getScores;
+        console.log(typeof userScores);
+} 
+viewScoreboard();
+}
+
 // render scores to scoreboard
 function viewScoreboard() {
+    renderHighScores();
     startPage.hidden=true;
     quiz.hidden=true;
     quizComplete.hidden=true;
@@ -178,17 +191,12 @@ function viewScoreboard() {
     } 
     }
 
-// get saved scored when "view saved scores" is clicked
-viewSavedScores.addEventListener('click', getSavedScores);
-function getSavedScores() {
-    var getScores = JSON.parse(localStorage.getItem('saved-scores'));
-    if (getScores !== null) {
-    console.log(getScores);
-    userScores = getScores;
-    console.log(userScores);
-} 
-viewScoreboard();
-}
+function renderHighScores() {
+    var highScores = Object.fromEntries(
+                    Object.entries(userScores).sort( (a,b) => a[1] - b[1] )    
+                 ) 
+    console.log('Sorted object: ', highScores); 
+};
 
 backToStart.addEventListener('click', returnToStartPage)
 function returnToStartPage() {
