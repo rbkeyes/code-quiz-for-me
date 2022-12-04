@@ -1,5 +1,3 @@
-
-
 // start page variables
 const startPage = document.getElementById("start-page");
 const startBtn = document.getElementById("start");
@@ -29,10 +27,12 @@ var score = 0;
 var myScore = document.getElementById("my-score");
 var finalScore;
 var initials = document.getElementById('initials');
-var userScores = [];
+var savedInitials = [];
+var savedScores = [];
 const saveBtn = document.getElementById('save-button');
 
 const scoreboard = document.getElementById('scoreboard');
+var highScores = [];
 
 // start quiz
 function startQuiz() {
@@ -150,23 +150,19 @@ function endOfQuiz() {
 saveBtn.addEventListener('click', saveUserScore);
 function saveUserScore() { 
     getSavedScores()
-    console.log(userScores);
-    userScores.push(initials.value + ': ' + finalScore + '%');
-    console.log('savedScores');
-    console.log(userScores);
-    localStorage.setItem('saved-scores', (JSON.stringify(userScores)));
+    // savedInitials.push(initials.value);
+    savedScores.push(initials.value + ': ' + finalScore);
+    localStorage.setItem("savedInitials", (JSON.stringify(savedInitials)));
+    localStorage.setItem("savedScores", (JSON.stringify(savedScores)));
     console.log('saved to local storage: ')
     console.log(localStorage);
-    // empty userScores variable after saving to storage to avoid array within an array, avoid dupli
-    userScores;
-    console.log("clear user scores");
-    console.log(userScores);
+    // empty savedInitials & savedScores variable after saving to storage to avoid array within an array, avoid duplicate values
+    savedInitials;
+    savedScores;
+    console.log("clear scores");
+    console.log(savedInitials);
     viewScoreboard();
 };
-
-// "view high scores" variables
-const viewSavedScores = document.getElementById('view-high-scores');
-var backToStart = document.getElementById('to-start-page');
 
 // render scores to scoreboard
 function viewScoreboard() {
@@ -174,20 +170,30 @@ function viewScoreboard() {
     quiz.hidden=true;
     quizComplete.hidden=true;
     scoreboard.hidden=false;
-    for (var s = 0; s < userScores.length; s++){
-        highScore = (document.getElementById(s + 1).textContent = userScores[s]);
-        console.log(highScore);
+    for (var s = 0; s < getScores.length; s++) {
+        // highScore = (document.getElementById(s + 1).textContent = userScores[s]);
+        // console.log();
     } 
     }
+
+function renderHighScores() {
+    for (var i=0; i<getScores.length; i++) {
+        
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.sort();
+fruits.reverse();
+document.getElementById("demo").innerHTML = fruits;
+    }
+}
 
 // get saved scored when "view saved scores" is clicked
 viewSavedScores.addEventListener('click', getSavedScores);
 function getSavedScores() {
-    var getScores = JSON.parse(localStorage.getItem('saved-scores'));
-    if (getScores !== null) {
-    console.log(getScores);
-    userScores = getScores;
-    console.log(userScores);
+    var getInitials = JSON.parse(localStorage.getItem("savedInitials"));
+    var getScores = JSON.parse(localStorage.getItem("savedScores"));
+    if ((getInitials && getScores) !== null) {
+    console.log(getInitials + ':  ' + getScores);
 } 
 viewScoreboard();
 }
@@ -199,10 +205,3 @@ function returnToStartPage() {
 
 // event listener for start button
 startBtn.addEventListener("click", startQuiz);
-
-var numArray = [140000, 104, 99];
-numArray.sort(function(a, b) {
-  return a - b;
-});
-
-console.log(numArray);
