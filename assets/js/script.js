@@ -31,7 +31,10 @@ var savedInitials = [];
 var savedScores = [];
 const saveBtn = document.getElementById('save-button');
 
+// "view high scores" variables
+const viewSavedScores = document.getElementById('view-high-scores');
 const scoreboard = document.getElementById('scoreboard');
+var backToStart = document.getElementById('to-start-page');
 
 // start quiz
 function startQuiz() {
@@ -163,9 +166,19 @@ function saveUserScore() {
     viewScoreboard();
 };
 
-// "view high scores" variables
-const viewSavedScores = document.getElementById('view-high-scores');
-var backToStart = document.getElementById('to-start-page');
+// get saved scored when "view saved scores" is clicked
+viewSavedScores.addEventListener('click', getSavedScores);
+function getSavedScores() {
+    var getInitials = JSON.parse(localStorage.getItem('initials'));
+    var getScores = JSON.parse(localStorage.getItem('score'));
+    if ((getInitials !== null) && (getScores !== null)) {
+    savedInitials = getInitials;
+    savedScores = getScores;
+    console.log('savedInitials:' + savedInitials);
+    console.log('savedScores:' + savedScores);
+} 
+viewScoreboard();
+}
 
 // render scores to scoreboard
 function viewScoreboard() {
@@ -179,17 +192,6 @@ function viewScoreboard() {
     } 
     }
 
-// get saved scored when "view saved scores" is clicked
-viewSavedScores.addEventListener('click', getSavedScores);
-function getSavedScores() {
-    var getScores = JSON.parse(localStorage.getItem('saved-scores'));
-    if (getScores !== null) {
-    console.log(getScores);
-    userScores = getScores;
-    console.log(userScores);
-} 
-viewScoreboard();
-}
 
 backToStart.addEventListener('click', returnToStartPage)
 function returnToStartPage() {
