@@ -135,7 +135,7 @@ function finalQuestion() {
 
 // calculate score
 function percentCorrect() {
-    finalScore = (score/(quizQuestions.length-1))*100;
+    finalScore = Math.floor(score/(quizQuestions.length-1))*100;
     console.log(finalScore);
     myScore.textContent = finalScore;
 }; 
@@ -158,12 +158,16 @@ function saveUserScore() {
     console.log('saved to local storage: ')
     console.log(localStorage);
     // empty savedInitials & savedScores variable after saving to storage to avoid array within an array, avoid duplicate values
-    savedInitials;
-    savedScores;
+    savedInitials = "";
+    savedScores = "";
     console.log("clear scores");
     console.log(savedInitials);
     viewScoreboard();
 };
+
+// "view high scores" variables
+const viewSavedScores = document.getElementById('view-high-scores');
+var backToStart = document.getElementById('to-start-page');
 
 // render scores to scoreboard
 function viewScoreboard() {
@@ -171,11 +175,11 @@ function viewScoreboard() {
     quiz.hidden=true;
     quizComplete.hidden=true;
     scoreboard.hidden=false;
-    for (var s = 0; s < getScores.length; s++) {
+    // for (var s = 0; s < getScores.length; s++) {
         // highScore = (document.getElementById(s + 1).textContent = userScores[s]);
         // console.log();
     } 
-    }
+    // }
 
 // function renderHighScores() {
 //     for (var i=0; i<getScores.length; i++) {
@@ -194,9 +198,11 @@ function getSavedScores() {
     var getInitials = JSON.parse(localStorage.getItem("savedInitials"));
     var getScores = JSON.parse(localStorage.getItem("savedScores"));
     if ((getInitials && getScores) !== null) {
+        savedInitials.push(getInitials);
+        savedScores.push(getScores);
     console.log(getInitials + ':  ' + getScores);
 } 
-viewScoreboard();
+// viewScoreboard();
 }
 
 backToStart.addEventListener('click', returnToStartPage)
