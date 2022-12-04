@@ -1,3 +1,14 @@
+const list = {
+    "you": 100,
+    "me": 75,
+    "foo": 116,
+    "bar": 15
+  };
+let sorted = Object.fromEntries(
+                Object.entries(list).sort( (a,b) => a[1] - b[1] )   
+             )
+console.log('Sorted object: ', sorted)
+
 // start page variables
 const startPage = document.getElementById("start-page");
 const startBtn = document.getElementById("start");
@@ -32,7 +43,8 @@ var savedScores = [];
 const saveBtn = document.getElementById('save-button');
 
 // "view high scores" variables
-const viewSavedScores = document.getElementById('view-high-scores');
+const viewHighScores = document.getElementById('view-high-scores');
+var highScoresObject = {};
 const scoreboard = document.getElementById('scoreboard');
 var backToStart = document.getElementById('to-start-page');
 
@@ -108,7 +120,7 @@ function correctAnswer() {
     score++;
     console.log('score: ' + score)
     result.textContent = "That is correct!";
-    result.className = 'select-correct';
+    result.className = 'alert';
     if (q < (quizQuestions.length-1)) {
         displayNextQuestion();
     } else {
@@ -121,7 +133,7 @@ function incorrectAnswer() {
     timeLeft -= 10;
     console.log('score: ' + score);
     result.textContent = "Sorry, that is incorrect.";
-    result.className = 'select-incorrect';
+    result.className = 'alert';
     if (q < (quizQuestions.length-1)) {
         displayNextQuestion();
     } else {
@@ -161,13 +173,14 @@ function saveUserScore() {
     // empty userScores variable after saving to storage to avoid array within an array, avoid duplicate
     savedInitials;
     savedScores;
-    console.log("clear user scores");
-    console.log(userScores);
+    console.log("clear savedInitials + savedScores");
+    console.log(savedInitials);
+    console.log(savedScores)
     viewScoreboard();
 };
 
 // get saved scored when "view saved scores" is clicked
-viewSavedScores.addEventListener('click', getSavedScores);
+viewHighScores.addEventListener('click', getSavedScores);
 function getSavedScores() {
     var getInitials = JSON.parse(localStorage.getItem('initials'));
     var getScores = JSON.parse(localStorage.getItem('score'));
@@ -176,7 +189,11 @@ function getSavedScores() {
     savedScores = getScores;
     console.log('savedInitials:' + savedInitials);
     console.log('savedScores:' + savedScores);
-} 
+} else {
+    var noSavedScores = document.getElementById('highScores');noSavedScores.textContent='No high scores to display at this time';
+    noSavedScores.className = 'alert';
+    
+}
 viewScoreboard();
 }
 
@@ -186,12 +203,19 @@ function viewScoreboard() {
     quiz.hidden=true;
     quizComplete.hidden=true;
     scoreboard.hidden=false;
-    for (var s = 0; s < userScores.length; s++){
-        highScore = (document.getElementById(s + 1).textContent = userScores[s] + '%');
+    renderHighScores();
+    for (var s = 0; s < savedInitials.length; s++){
+        highScore = (document.getElementById(s + 1))
+        highScore.textContent = savedInitials[s] + ': ' + savedScores[s] + '%';
         console.log(highScore);
     } 
-    }
+}
 
+function renderHighScores() {
+    for (let i = 0; i < savedInitials.length; i++) {
+        console.log(typeof highScoresObject);
+    }
+    }
 
 backToStart.addEventListener('click', returnToStartPage)
 function returnToStartPage() {
