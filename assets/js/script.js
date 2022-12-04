@@ -135,7 +135,7 @@ function finalQuestion() {
 
 // calculate score
 function percentCorrect() {
-    finalScore = (score/(quizQuestions.length-1))*100;
+    finalScore = Math.floor((score/(quizQuestions.length-1))*100);
     console.log(finalScore);
     myScore.textContent = finalScore;
 }; 
@@ -151,13 +151,13 @@ saveBtn.addEventListener('click', saveUserScore);
 function saveUserScore() { 
     getSavedScores()
     console.log(userScores);
-    userScores.push(initials.value + ': ' + finalScore + '%');
+    userScores.push(initials.value + ': ' + finalScore);
     console.log('savedScores');
     console.log(userScores);
     localStorage.setItem('saved-scores', (JSON.stringify(userScores)));
     console.log('saved to local storage: ')
     console.log(localStorage);
-    // empty userScores variable after saving to storage to avoid array within an array, avoid dupli
+    // empty userScores variable after saving to storage to avoid array within an array, avoid duplicate
     userScores;
     console.log("clear user scores");
     console.log(userScores);
@@ -175,7 +175,7 @@ function viewScoreboard() {
     quizComplete.hidden=true;
     scoreboard.hidden=false;
     for (var s = 0; s < userScores.length; s++){
-        highScore = (document.getElementById(s + 1).textContent = userScores[s]);
+        highScore = (document.getElementById(s + 1).textContent = userScores[s] + '%');
         console.log(highScore);
     } 
     }
@@ -200,9 +200,3 @@ function returnToStartPage() {
 // event listener for start button
 startBtn.addEventListener("click", startQuiz);
 
-var numArray = [140000, 104, 99];
-numArray.sort(function(a, b) {
-  return a - b;
-});
-
-console.log(numArray);

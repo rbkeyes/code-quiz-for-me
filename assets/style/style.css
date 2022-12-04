@@ -85,7 +85,7 @@ ol {
 
 .select-correct, .select-incorrect {
     font-style: italic;
-    color: var(--dark-green);
+    color: var(--lilac);
     
 }
 
