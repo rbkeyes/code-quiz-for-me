@@ -3,22 +3,21 @@ const quizComplete = document.getElementById("quiz-complete");
 var score = 0;
 var myScore = document.getElementById("my-score");
 var finalScore;
-var initials = document.getElementById('initials');
+var initials = document.getElementById('initials').value;
 var savedInitials = [];
 var userScores = [];
 const saveBtn = document.getElementById('save-button');
 
 const scoreboard = document.getElementById('scoreboard');
+var highScores = {};
 
 saveBtn.addEventListener('click', saveUserScore);
 function saveUserScore() { 
     getSavedScores()
-    savedInitials.push(initials.value);
-    console.log('savedScores');
-    console.log(userScores);
-    localStorage.setItem("initials", (JSON.stringify(savedInitials)));
-    localStorage.setItem(initials.value, (JSON.stringify(finalScore)));
+    savedInitials.push(initials);
+    localStorage.setItem(initials, (JSON.stringify(finalScore)));
     console.log('saved to local storage: ')
+    console.log
     console.log(localStorage);
     savedInitials;
     viewScoreboard();
@@ -31,11 +30,11 @@ var backToStart = document.getElementById('to-start-page');
 // get saved scored when "view saved scores" is clicked
 viewSavedScores.addEventListener('click', getSavedScores);
 function getSavedScores() {
-    var getInitials = JSON.parse(localStorage.getItem('initials'));
-    savedInitials.push(getInitials);
-    var getScores = JSON.parse(localStorage.getItem(initials.value));
+    // var getInitials = JSON.parse(localStorage.getItem('initials'));
+    // savedInitials.push(getInitials);
+    var getScores = JSON.parse(localStorage.getItem(initials));
     if (getScores !== null) {
-        console.log(savedInitials);
+        // console.log(savedInitials);
         console.log(getScores);
         // userScores.push(getScores);
         // console.log(typeof userScores);
@@ -54,11 +53,13 @@ function viewScoreboard() {
         highScore = (document.getElementById(s + 1).textContent = userScores[s] + '%');
         console.log(highScore);
     } 
-    }
+    };
 
-// function renderHighScores() {
-//     var highScores = Object.fromEntries(
-//                     Object.entries(userScores).sort( (a,b) => a[1] - b[1] )    
-//                  ) 
-//     console.log('Sorted object: ', highScores); 
-// };
+function renderHighScores() {
+    for (var i=0; i<=5; i++) {
+    var highScores = Object.fromEntries(
+                    Object.entries(userScores).sort( (a,b) => a[1] - b[1] )    
+                 ) 
+    console.log('Sorted object: ', highScores); 
+    }
+};
