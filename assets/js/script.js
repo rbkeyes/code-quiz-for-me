@@ -200,12 +200,16 @@ function viewScoreboard() {
 }
 
 function renderHighScores() {
-    for (let i = 0; i < savedScores.length; i++) {        
-    if (savedScores.sort((a, b) => b-a)) { 
-        if (savedScores.indexOf(savedScores[i]) === -1) {
-            savedInitials.indexOf(savedInitials[i]) === -1
-        }  
-    }                  
+    var userScores = [];
+    for (var l=0; l<savedInitials.length;l++) 
+    userScores.push({'initials': savedInitials[l], 'score': savedScores[l]});
+    userScores.sort(function(a,b) {
+        return (( a.score < b.score) ? -1 : ((a.score == b.score) ? 0:1));
+    });
+    console.log(userScores)
+    for (var h=0; h<userScores.length; h++) {
+        initials[h] = userScores[h].initials;
+        score[h] = userScores[h].score;
     }
     };
 
