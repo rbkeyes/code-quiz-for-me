@@ -1,14 +1,3 @@
-const list = {
-    "you": 100,
-    "me": 75,
-    "foo": 116,
-    "bar": 15
-  };
-let sorted = Object.fromEntries(
-                Object.entries(list).sort( (a,b) => a[1] - b[1] )   
-             )
-console.log('Sorted object: ', sorted)
-
 // start page variables
 const startPage = document.getElementById("start-page");
 const startBtn = document.getElementById("start");
@@ -44,7 +33,6 @@ const saveBtn = document.getElementById('save-button');
 
 // "view high scores" variables
 const viewHighScores = document.getElementById('view-high-scores');
-var highScoresObject = {};
 const scoreboard = document.getElementById('scoreboard');
 var backToStart = document.getElementById('to-start-page');
 
@@ -212,10 +200,14 @@ function viewScoreboard() {
 }
 
 function renderHighScores() {
-    for (let i = 0; i < savedInitials.length; i++) {
-        console.log(typeof highScoresObject);
+    for (let i = 0; i < savedScores.length; i++) {        
+    if (savedScores.sort((a, b) => b-a)) { 
+        if (savedScores.indexOf(savedScores[i]) === -1) {
+            savedInitials.indexOf(savedInitials[i]) === -1
+        }  
+    }                  
     }
-    }
+    };
 
 backToStart.addEventListener('click', returnToStartPage)
 function returnToStartPage() {
