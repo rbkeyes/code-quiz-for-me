@@ -27,12 +27,10 @@ var score = 0;
 var myScore = document.getElementById("my-score");
 var finalScore;
 var initials = document.getElementById('initials');
-var savedInitials = [];
-var savedScores = [];
+var userScores = [];
 const saveBtn = document.getElementById('save-button');
 
 const scoreboard = document.getElementById('scoreboard');
-var highScores = [];
 
 // start quiz
 function startQuiz() {
@@ -135,7 +133,7 @@ function finalQuestion() {
 
 // calculate score
 function percentCorrect() {
-    finalScore = Math.floor(score/(quizQuestions.length-1))*100;
+    finalScore = Math.floor((score/(quizQuestions.length-1))*100);
     console.log(finalScore);
     myScore.textContent = finalScore;
 }; 
@@ -150,18 +148,17 @@ function endOfQuiz() {
 saveBtn.addEventListener('click', saveUserScore);
 function saveUserScore() { 
     getSavedScores()
-    // savedInitials.push(initials.value);
-    savedInitials.push(initials.value);
-    savedScores.push(finalScore);
-    localStorage.setItem("savedInitials", (JSON.stringify(savedInitials)));
-    localStorage.setItem("savedScores", (JSON.stringify(savedScores)));
+    console.log(userScores);
+    userScores.push(initials.value + ': ' + finalScore);
+    console.log('savedScores');
+    console.log(userScores);
+    localStorage.setItem('saved-scores', (JSON.stringify(userScores)));
     console.log('saved to local storage: ')
     console.log(localStorage);
-    // empty savedInitials & savedScores variable after saving to storage to avoid array within an array, avoid duplicate values
-    savedInitials = "";
-    savedScores = "";
-    console.log("clear scores");
-    console.log(savedInitials);
+    // empty userScores variable after saving to storage to avoid array within an array, avoid duplicate
+    userScores;
+    console.log("clear user scores");
+    console.log(userScores);
     viewScoreboard();
 };
 
@@ -175,34 +172,22 @@ function viewScoreboard() {
     quiz.hidden=true;
     quizComplete.hidden=true;
     scoreboard.hidden=false;
-    // for (var s = 0; s < getScores.length; s++) {
-        // highScore = (document.getElementById(s + 1).textContent = userScores[s]);
-        // console.log();
+    for (var s = 0; s < userScores.length; s++){
+        highScore = (document.getElementById(s + 1).textContent = userScores[s] + '%');
+        console.log(highScore);
     } 
-    // }
-
-// function renderHighScores() {
-//     for (var i=0; i<getScores.length; i++) {
-        
-
-// const fruits = ["Banana", "Orange", "Apple", "Mango"];
-// fruits.sort();
-// fruits.reverse();
-// document.getElementById("demo").innerHTML = fruits;
-//     }
-// }
+    }
 
 // get saved scored when "view saved scores" is clicked
 viewSavedScores.addEventListener('click', getSavedScores);
 function getSavedScores() {
-    var getInitials = JSON.parse(localStorage.getItem("savedInitials"));
-    var getScores = JSON.parse(localStorage.getItem("savedScores"));
-    if ((getInitials && getScores) !== null) {
-        savedInitials.push(getInitials);
-        savedScores.push(getScores);
-    console.log(getInitials + ':  ' + getScores);
+    var getScores = JSON.parse(localStorage.getItem('saved-scores'));
+    if (getScores !== null) {
+    console.log(getScores);
+    userScores = getScores;
+    console.log(userScores);
 } 
-// viewScoreboard();
+viewScoreboard();
 }
 
 backToStart.addEventListener('click', returnToStartPage)
@@ -212,3 +197,5 @@ function returnToStartPage() {
 
 // event listener for start button
 startBtn.addEventListener("click", startQuiz);
+
+
