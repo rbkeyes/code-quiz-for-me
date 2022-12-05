@@ -56,6 +56,7 @@ button {
     background-color: var(--buddha-gold);
     border:1px solid #c7d0c3;
     border-radius: 5px;
+    margin-bottom: .75em;
 }
 
 button:hover {
@@ -96,7 +97,12 @@ ol {
     color: var(--lilac); 
 }
 
-#topFive {
+
+form {
+    padding: .5em 0;
+}
+
+.topFive {
     font-weight: bolder;
     width: 12rem;
     line-height: 2;

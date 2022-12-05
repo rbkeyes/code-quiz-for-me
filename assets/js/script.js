@@ -158,7 +158,7 @@ function saveUserScore() {
     localStorage.setItem('score', (JSON.stringify(savedScores)));
     console.log('saved to local storage: ')
     console.log(localStorage);
-    // empty userScores variable after saving to storage to avoid array within an array, avoid duplicate
+    // empty highScores variable after saving to storage to avoid array within an array, avoid duplicate
     savedInitials;
     savedScores;
     console.log("clear savedInitials + savedScores");
@@ -200,17 +200,28 @@ function viewScoreboard() {
 }
 
 function renderHighScores() {
-    var userScores = [];
+    // set array for sorted scores
+    var highScores = [];
+    // push retrieved initials + scores to highScores array as objects
     for (var l=0; l<savedInitials.length;l++) 
-    userScores.push({'initials': savedInitials[l], 'score': savedScores[l]});
-    userScores.sort(function(a,b) {
+    highScores.push({'initials': savedInitials[l], 'score': savedScores[l]});
+    // sort by score (returns low to high)
+    highScores.sort(function(a,b) {
         return (( a.score < b.score) ? -1 : ((a.score == b.score) ? 0:1));
     });
-    console.log(userScores)
-    for (var h=0; h<userScores.length; h++) {
-        initials[h] = userScores[h].initials;
-        score[h] = userScores[h].score;
+    // reverse array (highest to lowest)
+    highScores.reverse();
+    // reconstruct original arrays in sorted order
+    for (var h=0; h<highScores.length; h++) {
+        savedInitials[h] = highScores[h].initials;
+        savedScores[h] = highScores[h].score;
     }
+    if (savedInitials.length > 5) {
+        savedInitials.pop();
+        savedScores.pop();
+        console.log(savedInitials + ':' + savedScores);
+    }
+    console.log(highScores)
     };
 
 backToStart.addEventListener('click', returnToStartPage)
