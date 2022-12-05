@@ -21,7 +21,7 @@ var choiceD = document.getElementById("D");
 var result = document.getElementById('result');
 const viewFinalScoreBtn = document.getElementById('view-score-btn');
 
-// quiz complete variables
+// // quiz complete variables
 const quizComplete = document.getElementById("quiz-complete");
 var score = 0;
 var myScore = document.getElementById("my-score");
@@ -167,7 +167,7 @@ function saveUserScore() {
     viewScoreboard();
 };
 
-// get saved scored when "view saved scores" is clicked
+// get saved scores when "view saved scores" is clicked
 viewHighScores.addEventListener('click', getSavedScores);
 function getSavedScores() {
     var getInitials = JSON.parse(localStorage.getItem('initials'));
@@ -179,14 +179,29 @@ function getSavedScores() {
     console.log('savedScores:' + savedScores);
 } else {
     var noSavedScores = document.getElementById('highScores');noSavedScores.textContent='No high scores to display at this time';
-    noSavedScores.className = 'alert';
-    
+    noSavedScores.className = 'alert';   
 }
+viewScoreboard();
+}
+
+// get saved scored when "view saved scores" is clicked
+viewSavedScores.addEventListener('click', getSavedScores);
+function getSavedScores() {
+    var getInitials = JSON.parse(localStorage.getItem('initials'));
+    savedInitials.push(getInitials);
+    var getScores = JSON.parse(localStorage.getItem(initials.value));
+    if (getScores !== null) {
+        console.log(savedInitials);
+        console.log(getScores);
+        // userScores.push(getScores);
+        // console.log(typeof userScores);
+} 
 viewScoreboard();
 }
 
 // render scores to scoreboard
 function viewScoreboard() {
+    // renderHighScores();
     startPage.hidden=true;
     quiz.hidden=true;
     quizComplete.hidden=true;
@@ -198,6 +213,7 @@ function viewScoreboard() {
         console.log(highScore);
     } 
 }
+
 
 function renderHighScores() {
     // set array for sorted scores
@@ -231,5 +247,4 @@ function returnToStartPage() {
 
 // event listener for start button
 startBtn.addEventListener("click", startQuiz);
-
 
