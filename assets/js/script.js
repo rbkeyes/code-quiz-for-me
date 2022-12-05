@@ -191,10 +191,8 @@ function getSavedScores() {
     savedInitials.push(getInitials);
     var getScores = JSON.parse(localStorage.getItem(initials.value));
     if (getScores !== null) {
-        console.log(savedInitials);
+        console.log(getInitials);
         console.log(getScores);
-        // userScores.push(getScores);
-        // console.log(typeof userScores);
 } 
 viewScoreboard();
 }
