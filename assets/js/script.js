@@ -186,12 +186,11 @@ viewScoreboard();
 
 // render scores to scoreboard
 function viewScoreboard() {
-    // renderHighScores();
     startPage.hidden=true;
     quiz.hidden=true;
     quizComplete.hidden=true;
     scoreboard.hidden=false;
-    renderHighScores();
+    sortHighScores();
     for (var s = 0; s < savedInitials.length; s++){
         highScore = (document.getElementById(s + 1))
         highScore.textContent = savedInitials[s] + ': ' + savedScores[s] + '%';
@@ -199,7 +198,7 @@ function viewScoreboard() {
     } 
 }
 
-function renderHighScores() {
+function sortHighScores() {
     // set array for sorted scores
     var highScores = [];
     // push retrieved initials + scores to highScores array as objects

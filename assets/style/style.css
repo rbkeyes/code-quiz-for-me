@@ -40,6 +40,7 @@ h4 {
 }
 
 #container {
+    font-size: 125%;
     color: var(--clay-ash);
     background-color: var(--dark-green);
     padding: 25px;
