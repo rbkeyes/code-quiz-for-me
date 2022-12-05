@@ -24,7 +24,6 @@ header {
 }
 
 h1 {
-    font-weight: bolder;
     text-align: center;
     margin: 4rem 0 2rem;
 }
@@ -50,7 +49,14 @@ h4 {
 }
 
 button {
-    margin: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    padding: .5em;
+    color: var(--dark-green);
+    background-color: var(--buddha-gold);
+    border:1px solid #c7d0c3;
+    border-radius: 5px;
+    margin-bottom: .75em;
 }
 
 button:hover {
