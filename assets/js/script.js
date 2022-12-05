@@ -184,19 +184,6 @@ function getSavedScores() {
 viewScoreboard();
 }
 
-// get saved scored when "view saved scores" is clicked
-viewSavedScores.addEventListener('click', getSavedScores);
-function getSavedScores() {
-    var getInitials = JSON.parse(localStorage.getItem('initials'));
-    savedInitials.push(getInitials);
-    var getScores = JSON.parse(localStorage.getItem(initials.value));
-    if (getScores !== null) {
-        console.log(getInitials);
-        console.log(getScores);
-} 
-viewScoreboard();
-}
-
 // render scores to scoreboard
 function viewScoreboard() {
     // renderHighScores();
@@ -211,7 +198,6 @@ function viewScoreboard() {
         console.log(highScore);
     } 
 }
-
 
 function renderHighScores() {
     // set array for sorted scores
