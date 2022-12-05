@@ -13,7 +13,7 @@ In completing this project I learned a lot about storing and retrieving items to
 ## Usage
 The quiz loads on a start page, which displays instructions on how to begin. Clicking the "start quiz" button displays the quiz: a question with 4 multiple choice options to choose from. The user is informed of correct/incorrect answers as they progress through the quiz, with the option to view their score (click button "view final score") and save their score. When the score is saved, the leaderboard is displayed, showing the top 5 high scores (retrieved from local storage). Scores are sorted in order from highest to lowest, and both the user's initials and their score are displayed. Users are given the choice to return to the start page from the high scores, which reloads the page. 
 
-[Link to deployed site](https://rbkeyes.github.io/code-quiz-for-me/)
+[Link to deployed page](https://rbkeyes.github.io/code-quiz-for-me/)
 
 Screenshot of start page:
 ![Start page of code quiz for me](assets/images/coding-quiz-screenshot.png)
