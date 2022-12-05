@@ -60,7 +60,8 @@ button {
 }
 
 button:hover {
-    box-shadow: 0 0 3px 3px var(--canary)
+    color:var(--canary);
+    box-shadow: 0 0 3px 3px var(--canary);
 }
 
 ol {
@@ -76,12 +77,13 @@ ol {
     list-style-type: none;
     color: var(--dark-green);
     background-color: var(--buddha-gold);
-    padding: 4px;
+    padding: .25em;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: .75em;
 }
 
 .choice:hover {
+    color:var(--canary);
     box-shadow: 0 0 3px 3px var(--canary)
 }
 
@@ -90,10 +92,25 @@ ol {
 
 }
 
-.select-correct, .select-incorrect {
+.alert {
     font-style: italic;
-    color: var(--lilac);
-    
+    color: var(--lilac); 
 }
+
+
+form {
+    padding: .5em 0;
+
+}
+
+.topFive {
+    font-weight: bolder;
+    width: 12rem;
+    line-height: 2;
+    padding: .25em .25em .25em 1em;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
 
 

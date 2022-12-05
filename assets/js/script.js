@@ -28,10 +28,13 @@ var myScore = document.getElementById("my-score");
 var finalScore;
 var initials = document.getElementById('initials');
 var savedInitials = [];
-var userScores = [];
+var savedScores = [];
 const saveBtn = document.getElementById('save-button');
 
+// "view high scores" variables
+const viewHighScores = document.getElementById('view-high-scores');
 const scoreboard = document.getElementById('scoreboard');
+var backToStart = document.getElementById('to-start-page');
 
 // start quiz
 function startQuiz() {
@@ -105,7 +108,7 @@ function correctAnswer() {
     score++;
     console.log('score: ' + score)
     result.textContent = "That is correct!";
-    result.className = 'select-correct';
+    result.className = 'alert';
     if (q < (quizQuestions.length-1)) {
         displayNextQuestion();
     } else {
@@ -118,7 +121,7 @@ function incorrectAnswer() {
     timeLeft -= 10;
     console.log('score: ' + score);
     result.textContent = "Sorry, that is incorrect.";
-    result.className = 'select-incorrect';
+    result.className = 'alert';
     if (q < (quizQuestions.length-1)) {
         displayNextQuestion();
     } else {
@@ -150,19 +153,36 @@ saveBtn.addEventListener('click', saveUserScore);
 function saveUserScore() { 
     getSavedScores()
     savedInitials.push(initials.value);
-    console.log('savedScores');
-    console.log(userScores);
-    localStorage.setItem("initials", (JSON.stringify(savedInitials)));
-    localStorage.setItem(initials.value, (JSON.stringify(finalScore)));
+    savedScores.push(finalScore);
+    localStorage.setItem('initials', (JSON.stringify(savedInitials)));
+    localStorage.setItem('score', (JSON.stringify(savedScores)));
     console.log('saved to local storage: ')
     console.log(localStorage);
+    // empty highScores variable after saving to storage to avoid array within an array, avoid duplicate
     savedInitials;
+    savedScores;
+    console.log("clear savedInitials + savedScores");
+    console.log(savedInitials);
+    console.log(savedScores)
     viewScoreboard();
 };
 
-// "view high scores" variables
-const viewSavedScores = document.getElementById('view-high-scores');
-var backToStart = document.getElementById('to-start-page');
+// get saved scores when "view saved scores" is clicked
+viewHighScores.addEventListener('click', getSavedScores);
+function getSavedScores() {
+    var getInitials = JSON.parse(localStorage.getItem('initials'));
+    var getScores = JSON.parse(localStorage.getItem('score'));
+    if ((getInitials !== null) && (getScores !== null)) {
+    savedInitials = getInitials;
+    savedScores = getScores;
+    console.log('savedInitials:' + savedInitials);
+    console.log('savedScores:' + savedScores);
+} else {
+    var noSavedScores = document.getElementById('highScores');noSavedScores.textContent='No high scores to display at this time';
+    noSavedScores.className = 'alert';   
+}
+viewScoreboard();
+}
 
 // get saved scored when "view saved scores" is clicked
 viewSavedScores.addEventListener('click', getSavedScores);
@@ -186,18 +206,39 @@ function viewScoreboard() {
     quiz.hidden=true;
     quizComplete.hidden=true;
     scoreboard.hidden=false;
+    renderHighScores();
     for (var s = 0; s < savedInitials.length; s++){
-        highScore = (document.getElementById(s + 1).textContent = userScores[s] + '%');
+        highScore = (document.getElementById(s + 1))
+        highScore.textContent = savedInitials[s] + ': ' + savedScores[s] + '%';
         console.log(highScore);
     } 
-    }
+}
+
 
 function renderHighScores() {
-    var highScores = Object.fromEntries(
-                    Object.entries(userScores).sort( (a,b) => a[1] - b[1] )    
-                 ) 
-    console.log('Sorted object: ', highScores); 
-};
+    // set array for sorted scores
+    var highScores = [];
+    // push retrieved initials + scores to highScores array as objects
+    for (var l=0; l<savedInitials.length;l++) 
+    highScores.push({'initials': savedInitials[l], 'score': savedScores[l]});
+    // sort by score (returns low to high)
+    highScores.sort(function(a,b) {
+        return (( a.score < b.score) ? -1 : ((a.score == b.score) ? 0:1));
+    });
+    // reverse array (highest to lowest)
+    highScores.reverse();
+    // reconstruct original arrays in sorted order
+    for (var h=0; h<highScores.length; h++) {
+        savedInitials[h] = highScores[h].initials;
+        savedScores[h] = highScores[h].score;
+    }
+    if (savedInitials.length > 5) {
+        savedInitials.pop();
+        savedScores.pop();
+        console.log(savedInitials + ':' + savedScores);
+    }
+    console.log(highScores)
+    };
 
 backToStart.addEventListener('click', returnToStartPage)
 function returnToStartPage() {

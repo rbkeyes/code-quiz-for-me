@@ -46,7 +46,7 @@
 
         <!-- save score to leaderboard -->
         <section id="quiz-complete" hidden>
-            <h3>Quiz complete</h3>
+            <h2>Quiz complete</h2>
             <h4>Your score: <span id="my-score"></span>%</h4>
             <form action="save-my-score" method="save">
                 <label for="initials">
@@ -60,13 +60,13 @@
 
         <!-- view high scores -->
         <section id="scoreboard" hidden>
-            <h2>Recent High Scores</h2>
+            <h2 id="highScores">High Scores</h2>
             <ol id="topFive">
-                <li class='userHighScore' id="1">Your score here!</li>
-                <li class='userHighScore' id="2">Your score here!</li>
-                <li class='userHighScore' id="3">Your score here!</li>
-                <li class='userHighScore' id="4">Your score here!</li>
-                <li class='userHighScore' id="5">Your score here!</li>
+                <li class='userHighScore' id="1"></li>
+                <li class='userHighScore' id="2"></li>
+                <li class='userHighScore' id="3"></li>
+                <li class='userHighScore' id="4"></li>
+                <li class='userHighScore' id="5"></li>
             </ol>
             <button id="to-start-page">Return to start</button>
         </section>
